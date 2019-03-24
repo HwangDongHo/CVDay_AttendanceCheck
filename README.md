@@ -9,3 +9,5 @@ technology stack
 - html / css ( + ajax )
 - mysql
 - ubuntu
+
+this git exclusive mysql DB

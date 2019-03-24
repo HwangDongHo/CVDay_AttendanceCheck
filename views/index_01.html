@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta property="og:title" content=""/>
+	<meta property="og:description" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:type" content="website"/>
+<title>CV_LAB</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<div class="title_bar">
+	<div class="back_button">
+		<a href="/"><img src="img/back.png" alt=""></a>
+	</div>
+	<div class="title">
+		<h1>계정정보</h1>
+	</div>
+</div>
+<div id="content">
+	<form action="account/success" method="post"  onsubmit = "return check()">
+		<div class="Join_name">
+			<h2 class="name_name">이름</h2>
+			<input type="text" class="form-control" id="Join_name" onblur="onblur_name()" placeholder="이름을 입력해주세요." name="name">
+			<p class="ell_name">이름 형식이 올바르지 않습니다.</p>
+		</div>
+
+		<div class="Join_studentID">
+			<h2 class="studentid_name">학번 <span class="ok_box"><Input type='BUTTON' value='중복확인' onclick ='' id="checkBtn" class="bt-search"></span></h2>
+			<input type="number" class="form-control" id="Join_studentID" onblur="onblur_studentID()" placeholder="학번을 입력해주세요."  maxlength="8" oninput="maxLengthCheck(this)" name="student_number">
+			<p class="ell_studentid">이름 형식이 올바르지 않습니다.</p>
+			<p class="ell_studentid_chek">사용할 수 있는 아이디입니다.</p>
+
+		</div>
+		<div class="Join_email">
+			<h2 class="email_name">이메일<span class="ok_box"><Input type='BUTTON' value='중복확인' onclick ='' id="checkEBtn"class="bt-search"></span></h2>
+            <input type="email" class="form-control" id="Join_Email" onblur="onblur_email()" placeholder="이메일을 입력해주세요." name="email">
+            <p class="ell_text">이메일 형식이 올바르지 않습니다.</p>
+            <p class="ell_text_chek">사용할 수 있는 이메일입니다.</p>
+            <p><span><img src="img/not.jpg" alt=""></span>정확히 입력하지 않으시면 비밀번호 분실시 찾을 수 없습니다.</p>
+		</div>
+
+		<div class="Join_kaka">
+			<h2 class="kaka_name">카카오톡 아이디</h2>
+			<input type="text" class="form-control" id="Join_kaka" onblur="onblur_kaka()" placeholder="카카오톡 아이디를 입력해주세요." name="kakao">
+			 <p class="ell_kaka">카카오톡 아이디를 입력해주세요.</p>
+		</div>
+
+		<div class="Join_phone">
+			<h2 class="phone_name">휴대폰 번호</h2>
+				<input type="text" id="Join_phone_1" size="4" onblur="onblur_phone()" placeholder="휴대폰 번호를 입력해주세요." name="phone"/>
+			<p class="ell_phone">휴대폰 번호를 입력해주세요.</p>
+			<p><span><img src="img/not.jpg" alt=""></span>핸드폰 번호는 -를 포함해서 입력해주세요.</p>
+		</div>
+
+		<div class="Join_password">
+			<h2 class="password_name">비밀번호</h2>
+			<input type="password" class="form-control" id="Join_Password" onblur="onblur_Password()" placeholder="비밀번호를 입력해주세요.">
+			<p class="ell_pass">최소 8자 ~ 16자 영문과 숫자를 포함해야합니다.</p>
+			<input type="password" class="form-control" id="Join_Password_check" onblur="onblur_Password_chek()" placeholder="비밀번호를 한번 더 입력해주세요." name="password">
+			<p class="ell_passcheck">비밀번호가 일치하지 않습니다.</p>
+		</div>
+		<div class="Join_submit">
+			<input type="submit" value="회원가입 완료"/>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+	var phone_tf = false;
+	var kaka_tf = false;
+	var password_check_tf = false;
+	var password_tf = false;
+	var studentID_tf = false;
+	var name_tf = false;
+	var email_tf = false;
+	var jid_check = false;
+	var jemail_check = false;
+
+	function check(){
+		if (!phone_tf) {return false;}
+		else if(!kaka_tf){return false;}
+		else if(!password_check_tf){return false;}
+		else if(!password_tf){return false;}
+		else if(!studentID_tf){return false;}
+		else if(!name_tf){return false;}
+		else if(!email_tf){return false;}
+		else if(!jid_check){return false;}
+		else if(!jemail_check){return false;}
+		else{
+			return true;}
+
+
+	}
+
+	function maxLengthCheck(object){
+
+		if (object.value.length > object.maxLength){
+			object.value = object.value.slice(0, object.maxLength);
+		}
+	}
+
+	function onblur_phone(){
+		var $phone = $('#Join_phone_1');
+		var $phonetext = $('.ell_phone');
+		var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
+
+		if( !$phone.val() ){
+			$phonetext.css('display','block');
+			$phonetext.text('핸드폰 번호를 입력해주세요.');
+			phone_tf = false;
+			return false;
+		} else if(!rgEx.test($phone.val())) {
+			$phonetext.css('display','block');
+			$phonetext.text('핸드폰 번호 형식이 올바르지 않습니다.');
+			phone_tf = false;
+			return false;
+		} else{
+			$phonetext.css('display','none');
+			phone_tf = true;
+		}
+	}
+
+	function onblur_kaka(){
+		var $kaka = $('#Join_kaka');
+		var $kakatext = $('.ell_kaka');
+
+		if( !$kaka.val() ){
+			$kakatext.css('display','block');
+			$kakatext.text('카카오톡 아이디를 입력해주세요.');
+			kaka_tf = false;
+			return false;
+		}
+		else{
+			kaka_tf = true;
+			$kakatext.css('display','none');
+		}
+	}
+
+	function onblur_Password_chek(){
+		var $passwordtext_chek = $('.ell_passcheck');
+
+		if($("#Join_Password").val() != ($("#Join_Password_check").val())){
+			$passwordtext_chek.css('display','block');
+			$passwordtext_chek.text('비밀번호가 일치하지 않습니다.');
+			password_check_tf = false;
+			return false;
+		}else{
+			password_check_tf = true;
+			$passwordtext_chek.css('display','none');
+		}
+	}
+
+	function onblur_Password(){
+		var $password = $('#Join_Password');
+		var $passwordtext = $('.ell_pass');
+		var regExpPw = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+
+		if( !$password.val() ){
+			$passwordtext.css('display','block');
+			$passwordtext.text('비밀번호를 입력해주세요.');
+			password_tf = false;
+			return false;
+		} else if(!regExpPw.test($password.val())) {
+			$passwordtext.css('display','block');
+			$passwordtext.text('비밀번호에 특수문자, 숫자, 영문 1회이상 사용하여 8자리 이상 입력해주세요.');
+			password_tf = false;
+			return false;
+		} else{
+			password_tf = true;
+			$passwordtext.css('display','none');
+		}
+	}
+
+	function onblur_studentID(){
+		var $studentid = $('#Join_studentID').val();
+		var $studentidtext = $('.ell_studentid');
+
+
+		if($studentid.length < 6 || $studentid.length > 8){
+			$studentidtext.css('display','block');
+			$studentidtext.text('학번을 6자이상 8자 이하로 입력해주세요.');
+			studentID_tf = false;
+			return false;
+		}else{
+			studentID_tf = true;
+			$studentidtext.css('display','none');
+		}
+	}
+
+	function onblur_name(){
+		var $name = $('#Join_name');
+		var $nametext = $('.ell_name');
+		var getName= RegExp(/^[가-힣]+$/);
+
+		if( !$name.val() ){
+			$nametext.css('display','block');
+			$nametext.text('이름을 입력해주세요');
+			name_tf = false;
+			return false;
+		} else if(!getName.test($name.val())) {
+			$nametext.css('display','block');
+			$nametext.text('이름 형식이 올바르지 않습니다.');
+			name_tf = false;
+			return false;
+		} else{
+			name_tf = true;
+			$nametext.css('display','none');
+		}
+
+	}
+
+	function onblur_email(){
+		var $email = $('#Join_Email');
+		var $emailtext = $('.ell_text');
+		// 정규식 - 이메일 유효성 검사
+		var regEmail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		// 정규식 -전화번호 유효성 검사
+		//var regPhone = /^((01[0|1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+
+		if( !$email.val() ){
+			$emailtext.css('display','block');
+			$emailtext.text('이메일주소를 입력 해 주세요');
+			email_tf = false;
+			return false;
+		} else if(!regEmail.test($email.val())) {
+			$emailtext.css('display','block');
+			$emailtext.text('이메일 형식이 올바르지 않습니다.');
+			email_tf = false;
+			return false;
+		} else{
+			email_tf = true;
+			$emailtext.css('display','none');
+		}
+	}
+
+	$(document).on('click','#checkBtn',function(){
+
+		var $studentid = $('#Join_studentID').val();
+		var $studentidtext = $('.ell_studentid_chek');
+
+		var student_number = $('#Join_studentID').val();
+		$.ajax({
+			url : '/check_stnum',
+			dataType: 'json',
+			type : 'POST',
+			data : {'student_number':student_number},
+			success : function(result){
+				if(result.result == true){
+					if(result.check == 'no'){
+						$studentidtext.css('display','block');
+						$studentidtext.css('color','#ff0000');
+						$studentidtext.text('사용할수 없는 아이디입니다.');
+						studentID_tf = false;
+					}
+					else if(result.check == 'yes'){
+						studentID_tf = true;
+						jid_check= true;
+						$studentidtext.text('사용할수 있는 아이디입니다.');
+						$studentidtext.css('color','#14bdb6');
+						$studentidtext.css('display','block');
+					}
+				}
+			}
+		})
+	});
+
+	$(document).on('click','#checkEBtn',function(){
+
+		var $emailtext = $('.ell_text_chek');
+
+		var email = $('#Join_Email').val();
+		$.ajax({
+			url : '/check_email',
+			dataType: 'json',
+			type : 'POST',
+			data : {'email':email},
+			success : function(result){
+				if(result.result == true){
+					if(result.check == 'no'){
+						$emailtext.css('display','block');
+						$emailtext.css('color','#ff0000');
+						$emailtext.text('사용할수 없는 이메일입니다.');
+						email_tf = false;
+					}
+					else if(result.check == 'yes'){
+						email_tf = true;
+						jemail_check = true;
+						$emailtext.text('사용할수 있는 이메일입니다.');
+						$emailtext.css('color','#14bdb6');
+						$emailtext.css('display','block');
+					}
+				}
+			}
+		})
+	});
+
+
+
+
+</script>
+</body>
+</html>

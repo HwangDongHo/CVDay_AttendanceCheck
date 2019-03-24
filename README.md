@@ -10,4 +10,4 @@ technology stack
 - mysql
 - ubuntu
 
-this git exclusive mysql DB
+this git Project exept mysql DB

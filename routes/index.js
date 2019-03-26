@@ -5,7 +5,8 @@ var db = mysql.createConnection({
   host:'cvlab308.iptime.org',
   user:'mysql',
   password:'cvlab',
-  database:'TF'
+  database:'TF',
+  port: null
 });
 
 db.connect();

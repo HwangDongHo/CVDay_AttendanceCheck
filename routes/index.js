@@ -10,7 +10,7 @@ var db = mysql.createConnection({
 });
 
 db.connect();
-
+console.log("server on!");
 router.get('/', function(req, res, next) {
   res.render('index.html');
 });

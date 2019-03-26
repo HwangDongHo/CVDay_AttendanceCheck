@@ -6,7 +6,7 @@ var db = mysql.createConnection({
   user:'mysql',
   password:'cvlab',
   database:'TF',
-  port: null
+  port: 3306
 });
 
 db.connect();

@@ -3,8 +3,8 @@ var router = express.Router();
 var mysql = require('mysql');
 var db = mysql.createConnection({
   host:'db.cpwxmow3ltbq.ap-northeast-2.rds.amazonaws.com',
-  user:'mysql',
-  password:'cvlab',
+  user:'cvserver',
+  password:'ehdghghkd1',
   database:'TF',
   port: 3306
 });

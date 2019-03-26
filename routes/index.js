@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var db = mysql.createConnection({
-  host:'cvlab308.iptime.org',
+  host:'db.cpwxmow3ltbq.ap-northeast-2.rds.amazonaws.com',
   user:'mysql',
   password:'cvlab',
   database:'TF',

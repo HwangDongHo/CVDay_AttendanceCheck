@@ -6,7 +6,9 @@ var db = mysql.createConnection({
   user:'mysql',
   password:'cvlab',
   database:'TF'
-}).connect();
+});
+
+db.connect();
 
 router.get('/', function(req, res, next) {
   res.render('index.html');

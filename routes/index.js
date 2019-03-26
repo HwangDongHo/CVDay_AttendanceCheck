@@ -2,13 +2,11 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var db = mysql.createConnection({
-  host:'localhost',
+  host:'cvlab308.iptime.org',
   user:'mysql',
   password:'cvlab',
   database:'TF'
-});
-
-db.connect();
+}).connect();
 
 router.get('/', function(req, res, next) {
   res.render('index.html');

@@ -9,7 +9,18 @@ var db = mysql.createConnection({
   port: 3306
 });
 
-//db.connect();
+db.connect(function(error){
+  if(!!error)
+  {
+    console.log(error);
+    console.log('Error');
+  }
+  else
+  {
+    console.log(' db connected');
+  }
+});
+
 console.log("server on!");
 router.get('/', function(req, res, next) {
   res.render('index.html');

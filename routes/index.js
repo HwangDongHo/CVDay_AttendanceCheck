@@ -17,11 +17,12 @@ db.connect(function(error){
   }
   else
   {
-    console.log(' db connected');
+    console.log('DB connected!');
   }
 });
 
 console.log("server on!");
+
 router.get('/', function(req, res, next) {
   res.render('index.html');
 });

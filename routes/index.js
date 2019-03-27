@@ -56,13 +56,13 @@ router.post('/check_email',function(req, res){
   }
   else {
     db.query(`SELECT * FROM account WHERE email = '${email}'`, function (err, check) {
-      console.log(check);
+      //console.log(check);
       if (check[0]) {
         res.send({result: true, check: 'no'});
-        console.log('used');
+        //console.log('used');
       } else {
         res.send({result: true, check: 'yes'});
-        console.log('Not used');
+        //console.log('Not used');
       }
     });
   }

@@ -67,11 +67,11 @@
 
 			// draw in the table
 			for(var row = 0; row < qrcode.getModuleCount(); row++ ){
-				var $row = $('<tr></tr>').css('height', tileH+"px").appendTo($table);
+				var $row = $('<tr></tr>').css('height', 4+"%").appendTo($table);
 				
 				for(var col = 0; col < qrcode.getModuleCount(); col++ ){
 					$('<td></td>')
-						.css('width', tileW+"px")
+						.css('width', 4+"%")
 						.css('background-color', qrcode.isDark(row, col) ? options.foreground : options.background)
 						.appendTo($row);
 				}	

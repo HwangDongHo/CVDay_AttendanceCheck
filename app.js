@@ -5,14 +5,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-//var testRouter = require('./routes/testdb');
 var mainRouter = require('./routes/main');
 
 var app = express();
 
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave:false,
+  saveUninitialized :true
+}));
 
 
 app.use(bodyParser.json());
@@ -31,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', mainRouter);
-//app.use('/', testRouter);
 
 
 

@@ -1,30 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-var db = mysql.createConnection({
-  host:'db.cpwxmow3ltbq.ap-northeast-2.rds.amazonaws.com',
-  user:'cvserver',
-  password:'ehdghghkd1',
-  database:'TF',
-  port: 3306
-});
 
-db.connect(function(error){
-  if(!!error)
-  {
-    console.log(error);
-    console.log('Error');
-  }
-  else
-  {
-    console.log('DB connected!');
-  }
-});
+var sql = require('../DB/db_SQL')();
 
 console.log("server on!");
 
 router.get('/', function(req, res, next) {
-  res.render('index.html');
+    if(req.session.logined)
+      res.redirect("/main");
+    else {
+      res.render('index.html');
+    }
 });
 
 router.get('/account', function(req, res, next) {
@@ -37,7 +23,22 @@ router.post('/check_stnum',function(req, res){
     res.send({result: false, check: 'no'});
   }
   else {
-    db.query(`SELECT * FROM account WHERE stu_num = ${stu_num}`, function (err, check) {
+    var query = `SELECT * FROM account WHERE stu_num = ${stu_num}`
+    var param = '';
+    sql.query(function(err, check){
+      if (err) console.log(err);
+      //console.log(check)
+      if (check[0]) {
+        res.send({result: true, check: 'no'});
+      } else {
+        res.send({result: true, check: 'yes'});
+      }
+      //sql.pool.end(function(err){if (err) console.log(err);});
+    },query,param);
+    /*
+    var query = `SELECT * FROM account WHERE stu_num = ${stu_num}`
+    var param = ''
+    db.query(sql, param,function (err, check) {
       //console.log(check);
       if (check[0]) {
         res.send({result: true, check: 'no'});
@@ -47,6 +48,7 @@ router.post('/check_stnum',function(req, res){
         //console.log('Not used');
       }
     });
+    */
   }
 });
 
@@ -56,6 +58,19 @@ router.post('/check_email',function(req, res){
     res.send({result: false, check: 'no'});
   }
   else {
+    var query = `SELECT * FROM account WHERE email = '${email}'`
+    var param = '';
+    sql.query(function(err, check){
+      if (err) console.log(err);
+      //console.log(check)
+      if (check[0]) {
+        res.send({result: true, check: 'no'});
+      } else {
+        res.send({result: true, check: 'yes'});
+      }
+      //sql.pool.end(function(err){if (err) console.log(err);});
+    },query,param);
+    /*
     db.query(`SELECT * FROM account WHERE email = '${email}'`, function (err, check) {
       //console.log(check);
       if (check[0]) {
@@ -66,11 +81,9 @@ router.post('/check_email',function(req, res){
         //console.log('Not used');
       }
     });
+    */
   }
 });
-
-
-
 
 
 router.post('/account/success', function(req,res,next){
@@ -80,13 +93,15 @@ router.post('/account/success', function(req,res,next){
   var kakao = req.body.kakao;
   var phone = req.body.phone;
   var password = req.body.password
-  var sql = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,created) VALUES(?, ?, ?,?,?,?,NOW())`;
-  var params = [name, stu_num, email,kakao,phone,password];
-  db.query(sql, params,function(error, result) {
-    if (error) {
-      throw error;
-    }
-  });
+  var query = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,created) VALUES(?, ?, ?,?,?,?,NOW())`;
+  var param = [name, stu_num, email,kakao,phone,password];
+
+  sql.query(function(err, check){
+    if (err) console.log(err);
+    //console.log(check)
+    //sql.pool.end(function(err){if (err) console.log(err);});
+  },query,param);
+
   res.render('index_02.html');
 });
 

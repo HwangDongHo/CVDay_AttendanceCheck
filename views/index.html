@@ -17,17 +17,17 @@
 		<a href="#"><img src="img/Logo.png" alt="DIMAIN_LOGO"></a>
 	</div>
 	<div class="login_information">
-		<form action="/main/" method="post">
+		<form action="login/" method="post">
 			<div class="login_email">
 				<label for="Login_Email"></label>
-	            <input type="email" class="form-control" id="Login_Email" placeholder="이메일을 입력해주세요.">
+	            <input type="email" class="form-control" id="Login_Email" placeholder="이메일을 입력해주세요." name="email">
 			</div>
 			<div class="login_password">
 				<label for="Login_Password"></label>
-				<input type="password" class="form-control" id="Login_Password" placeholder="비밀번호를 입력해주세요.">
+				<input type="password" class="form-control" id="Login_Password" placeholder="비밀번호를 입력해주세요." name ="password">
 			</div>
 			<div class="login_submit">
-				<input type="submit" value="로그인"/>
+				<input type="submit" value="로그인" id="checkEBtn"/>
 			</div>
 		</form>
 		<div class="login_forget">

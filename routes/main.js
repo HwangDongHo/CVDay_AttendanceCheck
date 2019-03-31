@@ -41,7 +41,7 @@ router.get('/logout', function(req, res, next){
 });
 
 router.post('/check_time', function(req, res, next){
-  var time = moment().add(32,"hours").format("YYYY-MM-DD HH:mm:ss");
+  var time = moment().add(33,"hours").format("YYYY-MM-DD HH:mm:ss");
   res.send({result: true, time: time});
 });
 

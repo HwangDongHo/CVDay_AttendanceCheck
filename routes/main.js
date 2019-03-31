@@ -35,7 +35,7 @@ router.get('/main', function(req, res, next) {
     email: req.session.user_id ,
     stu_num:req.session.stu_num ,
     name:req.session.user_name,
-    image_qr:'http://localhost:8080/create_qr/'+req.session.stu_num
+    image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num
   });
 });
 

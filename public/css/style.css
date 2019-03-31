@@ -66,18 +66,18 @@ form{padding:15px 0 15px 0;}
 
 /*--슬라이드 메뉴--*/
 .btn {width: 25px;height: 25px;position: absolute;left: 20px;top: 12px;z-index: 1;background-image: url("../img/ham.png");background-size: 15px 15px;background-repeat: no-repeat;background-position: center;cursor: pointer;}
-#menu {width: 50%;height: 100%;position: fixed;top: 0px;left: -50%;z-index: 10;background-color: white;text-align: center;transition: All 0.2s ease;-webkit-transition: All 0.2s ease;-moz-transition: All 0.2s ease;-o-transition: All 0.2s ease;}
+#menu {width: 60%;height: 100%;position: fixed;top: 0px;left: -60%;z-index: 10;background-color: white;text-align: center;transition: All 0.2s ease;-webkit-transition: All 0.2s ease;-moz-transition: All 0.2s ease;-o-transition: All 0.2s ease;}
 #menu.open {left: 0px;}
-.user-edit2 {margin: 42px auto}
-.user-edit2 {display: block;width: 80px;height: 80px;position: relative;font-size: 12px;}
-.user-edit2 .img-area2 {width: 80px;height: 80px;border-radius: 60px;margin-bottom:20px}
-.user-edit2 .nik_name{font-size:10px; color:#363636;}
-.user-edit2 .menu-edit{margin:20px 0;padding-top:20px; border-top:2px solid #cccccc; text-align:left;}
-.user-edit2 .menu-edit ul li{padding:2px 0;}
-.user-edit2 .menu-edit ul li a{color:#828282;text-decoration:none;}
-.user-edit2 .menu-option{margin:20px 0;padding-top:20px; border-top:2px solid #cccccc; text-align:left;}
-.user-edit2 .menu-option ul li{padding:2px 0;}
-.user-edit2 .menu-option ul li a{color:#828282;text-decoration:none;}
+.menus {margin:40px 20px 20px;border-top:2px solid #ccc; border-bottom:2px solid #ccc}
+.menus li{text-align: left;padding-top:15px;padding-left:10px; padding-right:10px; font-size:14px; font-weight:bold; color:#828282;}
+.menus li:last-child{padding-bottom:15px;}
+
+.b_info{text-align:left;}
+.b_info h2{margin:0 20px 10px; font-size:14px; padding:0 10px;color:#828282;}
+.b_info ul{margin:0 20px;}
+.b_info ul li{padding:0 14px;font-size:14px;margin:5px 0;font-weight: bold;color:#828282;}
+
+.back_buttons{margin-top: 2px;}
 
 .page_cover.open {display: block;}
 .page_cover {width: 100%;height: 100%;position: fixed;top: 0px;left: 0px;background-color: rgba(0, 0, 0, 0.4);z-index: 4;display: none;}
@@ -117,7 +117,7 @@ input[type=checkbox]:checked + label { background-image: url('../img/select.png'
 .Join_name, .Join_kaka, .Join_phone{ margin-top:15px;}
 .Join_email, .Join_studentID{position:relative; margin-top:15px;}
 .Join_email .ell_text,.Join_password .ell_pass,.Join_password .ell_passcheck, .Join_name .ell_name,.Join_studentID .ell_studentid, .Join_kaka .ell_kaka ,.Join_phone .ell_phone{color:#ff0000; font-size:12px; margin-top:5px; display: none;}
-.Join_studentID .ell_studentid_chek, .Join_email .ell_text_chek{color:#14bdb6; font-size:12px; margin-top:5px; display:none}
+.Join_studentID .ell_studentid_chek, .Join_email .ell_text_chek{color:#14bdb6; font-size:12px; margin-top:5px;display: none;}
 .Join_email .email_name, .Join_studentID .studentid_name, .Join_name .name_name {padding-top:10px; font-size:16px; font-weight:bold;}
 .Join_email .email_name .ok_box, .Join_studentID .ok_box{position:absolute; top:45px; right:0; width:63px;height:23px; font-size:11px;font-weight:normal;}
 .Join_email .email_name .ok_box .bt-search, .Join_studentID .ok_box .bt-search{background:#14bdb6; padding:5px 8px; color:#fff;border-radius:4px; font-size:10px; border:0px; }
@@ -146,6 +146,7 @@ input[type=checkbox]:checked + label { background-image: url('../img/select.png'
 /*회원가입 완료*/
 .joinsu_image{margin: 60px 10px 40px;width: auto;text-align: center;}
 .joinsu_image img{width:100%;}
+
 /*로그인화면*/
 .title_bar .login_title h1{margin:0 80px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
 .login_title h1{line-height:50px; font-size:20px; color:#fff;font-weight:bold;}
@@ -160,3 +161,6 @@ input[type=checkbox]:checked + label { background-image: url('../img/select.png'
 .information .information_in ul{}
 .information .information_in ul li{background:#149fb0; margin:10px 0; padding:8px; }
 .information .information_in ul li span{color:#fff;font-size: 14px}
+
+
+

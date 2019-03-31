@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta property="og:title" content=""/>
+	<meta property="og:description" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:type" content="website"/>
+<title>CV_LAB</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body onload="showClock()">
+<div class="title_bar">
+	<div class="back_buttons btn">
+		<!--<a href="#"><img src="img/ham.png" alt=""></a>-->
+	</div>
+	<div class="login_title">
+		<h1>CV_LAB</h1>
+	</div>
+</div>
+	<div onclick="history.back();" class="page_cover"></div>
+	<div id="menu">
+		<div class="s_menu">
+			<ul class="menus">
+				<li>이름&nbsp;:&nbsp;<span><%= name %></span></li>
+				<li>학번&nbsp;:&nbsp;<span><%= stu_num %></span></li>
+				<li>지각 횟수&nbsp;:&nbsp;<span>10</span>회</li>
+				<li>지각 랭킹&nbsp;:&nbsp;<span>1</span>등</li>
+				<li>출석 랭킹&nbsp;:&nbsp;<span>12</span>등</li>
+			</ul>
+			<div class="b_info">
+				<h2>총 지각 벌금</h2>
+				<ul>
+					<li>-&nbsp;<span>120,000</span>원</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+<div id="content">
+	<div class="qrcode">
+		<div class="qrcode_in">
+			<img src="img/QRCodeSample.png">
+		</div>
+	</div>
+	<div class="information">
+		<div class="information_in"> 
+			<ul>
+				<li><span>이름:&nbsp;<em><%= name %></em></span></li>
+				<li><span>현재 시간:&nbsp;<em id="divClock" class="clock"><%= name %></em></span></li>
+				<li><span>출석 시간:&nbsp;<em>미출석</em></span></li>
+				<li><span>지각 여부:&nbsp;<em>미출석</em></span></li>
+				<li><span>지각 금액:&nbsp;<em>해당 없음</em></span></li>
+				<div id="server_time"><?php echo date("Y-m-d H:i:s", time()); ?></div>
+			</ul>
+		</div>
+
+	</div>
+</div>
+<script src="js/moment.min.js">
+
+</script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script language="javascript">
+	function showClock(){
+		var currentDate = new Date();
+		var divClock = document.getElementById("divClock");
+	/*
+		var msg = currentDate.getFullYear()+"-"
+		msg += ( currentDate.getMonth() + 1 ) +"-"
+		msg += currentDate.getDate() + " "
+		msg += currentDate.getHours()+":"
+		msg += currentDate.getMinutes()+":";
+		msg += currentDate.getSeconds();*/
+		console.log(moment().format('YYYY/MM/DD hh:mm:ss'));
+		divClock.innerText = moment().format('YYYY/MM/DD hh:mm:ss');
+		setTimeout(showClock,1000);
+	}
+
+
+
+</script>
+
+
+<script type="text/javascript">
+	$(".btn").click(function() {
+  $("#menu,.page_cover,html").addClass("open");
+  window.location.hash = "#open";
+});
+
+window.onhashchange = function() {
+  if (location.hash != "#open") {
+    $("#menu,.page_cover,html").removeClass("open");
+  }
+};
+</script>
+
+</body>
+</html>

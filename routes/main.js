@@ -6,10 +6,11 @@ var sql = require('../DB/db_SQL')();
 
 
 
+
 router.post('/login', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
-  var query = `select email,password,stu_num from account WHERE email = '${email}' AND password = '${password}'`;
+  var query = `select * from account WHERE email = '${email}' AND password = '${password}'`;
   var param = ''
 
   sql.query(function (err, check) {
@@ -17,6 +18,7 @@ router.post('/login', function(req, res, next) {
     if (check[0]) {
       req.session.logined = true;
       req.session.user_id = email;
+      req.session.user_name = check[0].name;
       req.session.stu_num = check[0].stu_num;
       res.redirect("/main");
     } else {
@@ -28,7 +30,7 @@ router.post('/login', function(req, res, next) {
 
 
 router.get('/main', function(req, res, next) {
-  res.render('qrcodetest.html',{ email: req.session.user_id , stu_num:req.session.stu_num });
+  res.render('index_03.html',{ email: req.session.user_id , stu_num:req.session.stu_num , name:req.session.user_name});
 });
 
 

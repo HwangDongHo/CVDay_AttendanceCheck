@@ -42,9 +42,7 @@
 
 <div id="content">
 	<div class="qrcode">
-		<div class="qrcode_in">
-			<img src="img/QRCodeSample.png">
-		</div>
+		<div class="qrcode_in" id="gcDiv"/>
 	</div>
 	<div class="information">
 		<div class="information_in"> 
@@ -67,22 +65,32 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script language="javascript">
 	function showClock() {
-		var currentDate = new Date();
 		var divClock = document.getElementById("divClock");
-		/*
-		var msg = currentDate.getFullYear()+"-"
-		msg += ( currentDate.getMonth() + 1 ) +"-"
-		msg += currentDate.getDate() + " "
-		msg += currentDate.getHours()+":"
-		msg += currentDate.getMinutes()+":";
-		msg += currentDate.getSeconds();*/
-		//console.log(moment().subtract(-15,'hours').format('YYYY/MM/DD hh:mm:ss'));
-		divClock.innerText = moment().subtract(-15, 'hours').format('YYYY/MM/DD hh:mm:ss');
+		$.ajax({
+			url : '/check_time',
+			dataType: 'json',
+			type : 'POST',
+			success : function(result){
+				if(result.result == true){
+					divClock.innerText = result.time;
+				}
+			}
+		})
 		setTimeout(showClock, 1000);
 	}
 
 </script>
 
+<script type="text/javascript" src="js/jquery.qrcode.js"></script>
+<script type="text/javascript" src="js/qrcode.js"></script>
+<script>
+	jQuery('#gcDiv').qrcode({
+		render	: "image",
+		width : 100,
+		height : 105,
+		text	: "1418455"
+	});
+</script>
 
 <script type="text/javascript">
 	$(".btn").click(function() {

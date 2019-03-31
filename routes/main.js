@@ -4,6 +4,7 @@ var router = express.Router();
 
 var sql = require('../DB/db_SQL')();
 
+var moment = require('moment');
 
 
 
@@ -37,6 +38,11 @@ router.get('/main', function(req, res, next) {
 router.get('/logout', function(req, res, next){
   req.session.destroy();
     res.redirect('/');
+});
+
+router.post('/check_time', function(req, res, next){
+  var time = moment().format("YYYY-MM-DD HH:mm:ss");
+  res.send({result: true, time: time});
 });
 
 

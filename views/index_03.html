@@ -42,7 +42,9 @@
 
 <div id="content">
 	<div class="qrcode">
-		<div class="qrcode_in" id="gcDiv"/>
+		<div class="qrcode_in">
+			<img src="<%= image_qr %> ">
+		</div>
 	</div>
 	<div class="information">
 		<div class="information_in"> 
@@ -78,20 +80,7 @@
 		})
 		setTimeout(showClock, 1000);
 	}
-
 </script>
-
-<script type="text/javascript" src="js/jquery.qrcode.js"></script>
-<script type="text/javascript" src="js/qrcode.js"></script>
-<script>
-	jQuery('#gcDiv').qrcode({
-		render	: "image",
-		width : 100,
-		height : 100,
-		text	: "1418455"
-	});
-</script>
-
 <script type="text/javascript">
 	$(".btn").click(function() {
   $("#menu,.page_cover,html").addClass("open");
@@ -103,6 +92,8 @@ window.onhashchange = function() {
     $("#menu,.page_cover,html").removeClass("open");
   }
 };
+
+
 </script>
 
 </body>

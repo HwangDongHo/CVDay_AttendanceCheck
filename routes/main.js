@@ -6,7 +6,7 @@ var sql = require('../DB/db_SQL')();
 
 var moment = require('moment');
 
-
+var QRCode = require('qrcode')
 
 router.post('/login', function(req, res, next) {
   var email = req.body.email;
@@ -31,7 +31,12 @@ router.post('/login', function(req, res, next) {
 
 
 router.get('/main', function(req, res, next) {
-  res.render('index_03.html',{ email: req.session.user_id , stu_num:req.session.stu_num , name:req.session.user_name});
+  res.render('index_03.html',{
+    email: req.session.user_id ,
+    stu_num:req.session.stu_num ,
+    name:req.session.user_name,
+    image_qr:'http://localhost:8080/create_qr/'+req.session.stu_num
+  });
 });
 
 
@@ -46,8 +51,18 @@ router.post('/check_time', function(req, res, next){
 });
 
 
-
-
+router.get('/create_qr/:qrcode',(req, res) =>{
+  let inputStr = req.params.qrcode;
+  QRCode.toDataURL(inputStr, function (err, url) {
+    let data = url.replace(/.*,/,'');
+    let img = new Buffer(data,'base64');
+    res.writeHead(200,{
+      'Content-Type' : 'image/png',
+      'Content-Length' : img.length
+    })
+    res.end(img)
+  })
+})
 
 module.exports = router;
 

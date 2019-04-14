@@ -81,10 +81,10 @@
 					divClock.innerText = result.time;
                     divAttend.innerText = result.attend_time;
                     if(result.late_time == 0) {
-                        divLate.innerText = result.late_time;
+                        divLate.innerText = "해당없음";
                     }
                     else{
-                        divLate.innerText = result.late_time;
+                        divLate.innerText = result.late_time + "분 지각";
                         divLate_money.innerText = result.late_time*200;
                     }
 				}

@@ -9,11 +9,7 @@ io.sockets.on('connection', function (socket) {
   console.log("enter user : " + socket.id);
   socket.on('check', function (data) {
     console.log('출석체크 :'+data);
-
-    
-
-
-
+    socket.emit("recieve","출석됨");
   });
 });
 

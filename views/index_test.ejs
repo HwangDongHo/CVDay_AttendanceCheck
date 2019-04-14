@@ -7,6 +7,7 @@
 </head>
 <body>
 <input type="button" value="check submit" onclick="myOnClick()">
+<input type="button" value="check_db submit" onclick="myOnClick2()">
 </body>
 <script>
 
@@ -14,6 +15,9 @@
   //var socket = io.connect('http://localhost:8181');
   function myOnClick() {
     socket.emit("check", "14184455");
+  }
+  function myOnClick2() {
+    socket.emit("check2", "14184455");
   }
 
 </script>

@@ -8,18 +8,47 @@ var QRCode = require('qrcode');
 io.sockets.on('connection', function (socket) {
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);
+    var query = `SELECT * FROM account WHERE stu_num = ${data}`;
+    var param = '';
+    sql.query(function(err, check){
+      if (err) console.log(err);
+      if (check[0]) {
+        var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss"); var time_string = time.toString();
+        var late = moment().hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
+        var minute = moment(time).diff(late,"minute");
+        console.log(time+"  "+minute+"분  "+minute*200+"원");
 
-    var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
-    var late = moment().hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
-    var minute = moment(time).diff(late,"minute");
+        var query2 = `INSERT INTO late_log (stu_num,check_time,how_late) VALUES(?,?,?)`;
+        var param2 = [data,time,minute];
 
-    console.log(time+"    "+minute+"분   "+minute*200+"원");
+        sql.query(function(err, check){
+          if (err) console.log(err);
+        },query2,param2);
 
-    var query = `INSERT INTO late_log (stu_num, check_time, how_late VALUES(?, ?, ?)`;
-    var param = [data, time,late];
+        socket.emit("recieve","checked");
+      } else {
+        console.log("not registered!");
+        socket.emit("recieve","not registered");
+      }
+    },query,param);
 
-    socket.emit("recieve","출석됨");
+  /*
+  socket.on('check2', function (data) {
+    var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) GROUP BY ym,stu_num ORDER BY cnt DESC;`;
+    var param3 = '';
+    sql.query(function (err, check) {
+      if (err) console.log(err);
+      if (check[0]) {
+        for(var i =0;i<check.length;i++){
+          console.log(check[i].plus);
+        }
+
+      } else {
+        console.log("no")
+      }
+    }, query3, param3);
   });
+  });*/
 });
 
 
@@ -46,12 +75,70 @@ router.post('/login', function(req, res, next) {
 
 
 router.get('/main', function(req, res, next) {
-  res.render('index_03.html',{
-    email: req.session.user_id ,
-    stu_num:req.session.stu_num ,
-    name:req.session.user_name,
-    image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num
-  });
+  var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) GROUP BY ym,stu_num ORDER BY cnt DESC;`;
+  var param3 = '';
+  sql.query(function (err, check) {
+    if (err) console.log(err);
+    if (check[0]) {
+      var time = 0;
+      var rank = 0;
+      var total = 0;
+      for(var i =0;i<check.length;i++){
+        if(req.session.stu_num == check[i].stu_num)
+          time = check[i].cnt;
+          rank = i;
+          total = check[i].plus*200;
+      }
+      res.render('index_03.html',{
+        email: req.session.user_id ,
+        stu_num:req.session.stu_num ,
+        name:req.session.user_name,
+        image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
+        late_times:time,
+        late_rank:rank,
+        total_m:total
+      });
+
+    } else {
+      res.render('index_03.html',{
+        email: req.session.user_id ,
+        stu_num:req.session.stu_num ,
+        name:req.session.user_name,
+        image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
+        late_times:"error",
+        late_rank:"error"
+      });
+    }
+  }, query3, param3);
+
+
+
+
+  /*
+  var query3 = `select * from late_log WHERE stu_num = '${req.session.stu_num}'`;
+  var param3 = '';
+  sql.query(function (err, check) {
+    if (err) console.log(err);
+    if (check[0]) {
+      res.render('index_03.html',{
+        email: req.session.user_id ,
+        stu_num:req.session.stu_num ,
+        name:req.session.user_name,
+        image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
+        late_times:check.length
+      });
+    } else {
+      res.render('index_03.html',{
+        email: req.session.user_id ,
+        stu_num:req.session.stu_num ,
+        name:req.session.user_name,
+        image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
+        late_times:0
+      });
+    }
+  }, query3, param3);*/
+
+
 });
 
 router.get('/test', function(req, res, next) {

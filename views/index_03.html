@@ -26,14 +26,14 @@
 			<ul class="menus">
 				<li>이름&nbsp;:&nbsp;<span><%= name %></span></li>
 				<li>학번&nbsp;:&nbsp;<span><%= stu_num %></span></li>
-				<li>지각 횟수&nbsp;:&nbsp;<span>10</span>회</li>
-				<li>지각 랭킹&nbsp;:&nbsp;<span>1</span>등</li>
-				<li>출석 랭킹&nbsp;:&nbsp;<span>12</span>등</li>
+				<li>지각 횟수&nbsp;:&nbsp;<span><%= late_times%></span>회</li>
+				<li>지각 랭킹&nbsp;:&nbsp;<span><%= late_rank %></span>등</li>
+				<!--<li>출석 랭킹&nbsp;:&nbsp;<span>12</span>등</li>-->
 			</ul>
 			<div class="b_info">
 				<h2>총 지각 벌금</h2>
 				<ul>
-					<li>-&nbsp;<span>120,000</span>원</li>
+					<li>-&nbsp;<span><%= total_m %></span>원</li>
 				</ul>
 			</div>
 		</div>

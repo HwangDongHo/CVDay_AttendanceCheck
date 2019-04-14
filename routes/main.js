@@ -6,6 +6,7 @@ var moment = require('moment');
 var QRCode = require('qrcode');
 
 io.sockets.on('connection', function (socket) {
+  
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);
     var query = `SELECT * FROM account WHERE stu_num = ${data}`;
@@ -47,8 +48,9 @@ io.sockets.on('connection', function (socket) {
         console.log("no")
       }
     }, query3, param3);
-  });
   });*/
+  });
+
 });
 
 
@@ -111,34 +113,6 @@ router.get('/main', function(req, res, next) {
     }
   }, query3, param3);
 
-
-
-
-  /*
-  var query3 = `select * from late_log WHERE stu_num = '${req.session.stu_num}'`;
-  var param3 = '';
-  sql.query(function (err, check) {
-    if (err) console.log(err);
-    if (check[0]) {
-      res.render('index_03.html',{
-        email: req.session.user_id ,
-        stu_num:req.session.stu_num ,
-        name:req.session.user_name,
-        image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
-        late_times:check.length
-      });
-    } else {
-      res.render('index_03.html',{
-        email: req.session.user_id ,
-        stu_num:req.session.stu_num ,
-        name:req.session.user_name,
-        image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
-        late_times:0
-      });
-    }
-  }, query3, param3);*/
-
-
 });
 
 router.get('/test', function(req, res, next) {
@@ -178,7 +152,3 @@ router.get('/create_qr/:qrcode',(req, res) =>{
 })
 
 module.exports = router;
-
-
-
-

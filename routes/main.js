@@ -1,15 +1,21 @@
-
 var express = require('express');
 var router = express.Router();
-
 var sql = require('../DB/db_SQL')();
-var io = require('../socket/socket')();
-
+var io = require('socket.io')(8181);
 var moment = require('moment');
-
 var QRCode = require('qrcode');
 
-io.connect();
+io.sockets.on('connection', function (socket) {
+  console.log("enter user : " + socket.id);
+  socket.on('check', function (data) {
+    console.log('출석체크 :'+data);
+
+    
+
+
+
+  });
+});
 
 
 router.post('/login', function(req, res, next) {

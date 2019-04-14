@@ -9,8 +9,8 @@ io.sockets.on('connection', function (socket) {
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);
 
-    var time = moment().add(33,"hours").format("YYYY-MM-DD HH:mm:ss");
-    var late = moment().add(1,"day").hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
+    var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
+    var late = moment().hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
     var diff = moment(time).diff(late,"hours");
     console.log(time);
     console.log(late);

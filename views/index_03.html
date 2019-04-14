@@ -51,9 +51,9 @@
 			<ul>
 				<li><span>이름:&nbsp;<em><%= name %></em></span></li>
 				<li><span>현재 시간:&nbsp;<em id="divClock" class="clock"><%= name %></em></span></li>
-				<li class="attendance"><span>출석 시간:&nbsp;<em>미출석</em></span></li>
-				<li class="late"><span>지각 여부:&nbsp;<em>미출석</em></span></li>
-				<li class="late_m"><span>지각 금액:&nbsp;<em>해당 없음</em></span></li>
+				<li><span>출석 시간:&nbsp;<em id="divAttend">미출석</em></span></li>
+				<li><span>지각 여부:&nbsp;<em id="divLate">미출석</em></span></li>
+				<li><span>지각 금액:&nbsp;<em id="divLate_money">해당 없음</em></span></li>
 				<div id="server_time"><?php echo date("Y-m-d H:i:s", time()); ?></div>
 			</ul>
 		</div>
@@ -69,6 +69,9 @@
 <script language="javascript">
 	function showClock() {
 		var divClock = document.getElementById("divClock");
+        var divAttend = document.getElementById("divAttend");
+        var divLate = document.getElementById("divLate");
+        var divLate_money = document.getElementById("divLate_money");
 		$.ajax({
 			url : '/check_time',
 			dataType: 'json',
@@ -76,6 +79,14 @@
 			success : function(result){
 				if(result.result == true){
 					divClock.innerText = result.time;
+                    divAttend.innerText = result.attend_time;
+                    if(result.late_time == 0) {
+                        divLate.innerText = result.late_time;
+                    }
+                    else{
+                        divLate.innerText = result.late_time;
+                        divLate_money.innerText = result.late_time*200;
+                    }
 				}
 			}
 		})
@@ -94,6 +105,7 @@ window.onhashchange = function() {
   }
 };
 
+/*
 var socket = io.connect('http://15.164.54.201:8181');
 //var socket = io.connect('http://localhost:8181');
 
@@ -110,7 +122,7 @@ var socket = io.connect('http://15.164.54.201:8181');
 		}
 	});
 
-
+*/
 </script>
 
 </body>

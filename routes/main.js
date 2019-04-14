@@ -27,6 +27,7 @@ io.sockets.on('connection', function (socket) {
         },query2,param2);
 
         socket.emit("recieve","checked");
+        socket.emit("page",{time:time,late:minute});
       } else {
         console.log("not registered!");
         socket.emit("recieve","not registered");

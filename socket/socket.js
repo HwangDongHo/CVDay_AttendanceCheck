@@ -6,7 +6,7 @@ module.exports = function () {
         connect: function(){
             io.sockets.on('connection', function (socket) {
                 console.log("enter user : " + socket.id);
-                socket.on('msg', function (data) {
+                socket.on('check', function (data) {
                     console.log('서버에서 수신 :'+data);
                 });
             });

@@ -44,7 +44,6 @@ router.get('/main', function(req, res, next) {
 });
 
 router.get('/test', function(req, res, next) {
-  io.emit("msg2","hihihihi");
   res.render('index_test');
 });
 

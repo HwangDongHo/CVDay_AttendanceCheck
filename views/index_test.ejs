@@ -6,24 +6,17 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-<input type="button" value="msg submit" onclick="myOnClick()">
-<input type="button" value="msg2 submit" onclick="myOnClick2()">
+<input type="button" value="check submit" onclick="myOnClick()">
 </body>
 <script>
 
   var socket = io.connect('http://15.164.54.201:8181');
 
-  socket.on('msg2', function (data) {
-    console.log(data);
-    $('#chat').append(data.comment);
-  });
 
   function myOnClick() {
-    socket.emit("msg", "hi server");
+    socket.emit("check", "test button");
     $('#user').val('');
   }
-  function myOnClick2() {
-    socket.emit("msg2", "hi py");
-  }
+
 </script>
 </html>

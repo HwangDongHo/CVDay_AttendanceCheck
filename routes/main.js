@@ -6,7 +6,7 @@ var moment = require('moment');
 var QRCode = require('qrcode');
 
 io.sockets.on('connection', function (socket) {
-  
+
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);
     var query = `SELECT * FROM account WHERE stu_num = ${data}`;
@@ -108,7 +108,8 @@ router.get('/main', function(req, res, next) {
         name:req.session.user_name,
         image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
         late_times:"error",
-        late_rank:"error"
+        late_rank:"error",
+        total_m:"error"
       });
     }
   }, query3, param3);

@@ -77,7 +77,7 @@ router.post('/login', function(req, res, next) {
 
 
 router.get('/main', function(req, res, next) {
-  var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) GROUP BY ym,stu_num ORDER BY cnt DESC;`;
+  var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) GROUP BY ym,stu_num ORDER BY plus DESC;`;
   var param3 = '';
   sql.query(function (err, check) {
     if (err) console.log(err);
@@ -86,10 +86,11 @@ router.get('/main', function(req, res, next) {
       var rank = 0;
       var total = 0;
       for(var i =0;i<check.length;i++){
-        if(req.session.stu_num == check[i].stu_num)
+        if(req.session.stu_num == check[i].stu_num) {
           time = check[i].cnt;
-          rank = i;
-          total = check[i].plus*200;
+          rank = i+1;
+          total = check[i].plus * 200;
+        }
       }
       res.render('index_03.html',{
         email: req.session.user_id ,

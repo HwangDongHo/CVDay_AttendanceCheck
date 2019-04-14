@@ -3,10 +3,14 @@ var express = require('express');
 var router = express.Router();
 
 var sql = require('../DB/db_SQL')();
+var io = require('../socket/socket')();
 
 var moment = require('moment');
 
-var QRCode = require('qrcode')
+var QRCode = require('qrcode');
+
+io.connect();
+
 
 router.post('/login', function(req, res, next) {
   var email = req.body.email;
@@ -39,6 +43,10 @@ router.get('/main', function(req, res, next) {
   });
 });
 
+router.get('/test', function(req, res, next) {
+  io.emit("msg2","hihihihi");
+  res.render('index_test');
+});
 
 router.get('/logout', function(req, res, next){
   req.session.destroy();
@@ -53,7 +61,14 @@ router.post('/check_time', function(req, res, next){
 
 router.get('/create_qr/:qrcode',(req, res) =>{
   let inputStr = req.params.qrcode;
-  QRCode.toDataURL(inputStr, function (err, url) {
+  var opts = {
+    errorCorrectionLevel: 'H',
+    type: 'image/jpeg',
+    rendererOpts: {
+      quality: 1
+    }
+  }
+  QRCode.toDataURL(inputStr, { version: 40 },function (err, url) {
     let data = url.replace(/.*,/,'');
     let img = new Buffer(data,'base64');
     res.writeHead(200,{

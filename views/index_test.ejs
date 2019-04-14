@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= late %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= late %></h1>
-    <p>Welcome to <%= late %></p>
-    <br><br><br>
-    <form action="test/send_email" method="post">
-      email:<input type="text" name="email"><br>
-      보내기:<input type="submit">
-    </form>
+<head>
+  <title>title</title>
+  <script src="../socket.io-client/dist/socket.io.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<textarea rows="20" cols="30" id="chat"></textarea><br>
+<input type="button" value="msg submit" onclick="myOnClick()">
+<input type="button" value="msg2 submit" onclick="myOnClick2()">
+</body>
+<script>
 
-  </body>
+  var socket = io.connect('http://http://15.164.54.201:8181');
+
+  socket.on('msg2', function (data) {
+    console.log(data);
+    $('#chat').append(data.comment);
+  });
+
+  function myOnClick() {
+    socket.emit("msg", "hi server");
+    $('#user').val('');
+  }
+  function myOnClick2() {
+    socket.emit("msg2", "hi py");
+  }
+</script>
 </html>

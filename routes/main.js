@@ -8,6 +8,17 @@ var QRCode = require('qrcode');
 io.sockets.on('connection', function (socket) {
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);
+
+    var time = moment().add(33,"hours").format("YYYY-MM-DD HH:mm:ss");
+    var late = moment().add(1,"day").hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
+    var diff = moment(time).diff(late,"hours");
+    console.log(time);
+    console.log(late);
+    console.log(diff);
+
+    var query = `INSERT INTO late_log (stu_num, check_time, how_late VALUES(?, ?, ?)`;
+    var param = [data, time,late];
+
     socket.emit("recieve","출석됨");
   });
 });
@@ -68,7 +79,8 @@ router.get('/create_qr/:qrcode',(req, res) =>{
       quality: 1
     }
   }
-  QRCode.toDataURL(inputStr, { version: 40 },function (err, url) {
+
+  QRCode.toDataURL(inputStr, {version:1},function (err, url) {
     let data = url.replace(/.*,/,'');
     let img = new Buffer(data,'base64');
     res.writeHead(200,{

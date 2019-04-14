@@ -11,11 +11,8 @@
 <script>
 
   var socket = io.connect('http://15.164.54.201:8181');
-
-
   function myOnClick() {
     socket.emit("check", "test button");
-    $('#user').val('');
   }
 
 </script>

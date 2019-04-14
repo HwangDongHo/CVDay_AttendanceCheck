@@ -11,11 +11,10 @@ io.sockets.on('connection', function (socket) {
 
     var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
     var late = moment().hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
-    var hour = moment(time).diff(late,"hours");
     var minute = moment(time).diff(late,"minute");
+
     console.log(time);
-    console.log(late);
-    console.log(hour+"시간"+minute+"분");
+    console.log(minute+"분   "+minute*200+"원");
 
     var query = `INSERT INTO late_log (stu_num, check_time, how_late VALUES(?, ?, ?)`;
     var param = [data, time,late];

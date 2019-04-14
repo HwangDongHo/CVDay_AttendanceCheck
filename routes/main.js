@@ -107,9 +107,9 @@ router.get('/main', function(req, res, next) {
         stu_num:req.session.stu_num ,
         name:req.session.user_name,
         image_qr:'http://cvlab308.cf/create_qr/'+req.session.stu_num,
-        late_times:"error",
-        late_rank:"error",
-        total_m:"error"
+        late_times:"0",
+        late_rank:"0",
+        total_m:"0"
       });
     }
   }, query3, param3);

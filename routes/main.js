@@ -128,21 +128,24 @@ router.get('/logout', function(req, res, next){
 });
 
 router.post('/check_time', function(req, res, next){
-  var time = moment().add(33,"hours").format("YYYY-MM-DD HH:mm:ss");
-  var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(now())`
-  var param = '';
-  sql.query(function(err, check){
-    if (err) console.log(err);
-    //console.log(check)
-    if (check[0]) {
-      //console.log(check[0]);
-      res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
-    } else {
-      //res.send({result: true, check: 'yes'});
-    }
-  },query,param);
+  if(req.session.logined)
+  {
+    var stu_num = req.session.stu_num;
+    var time = moment().add(33,"hours").format("YYYY-MM-DD HH:mm:ss");
+    var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(now()) AND stu_num = ${stu_num}`
+    var param = '';
+    sql.query(function(err, check){
+      if (err) console.log(err);
+      //console.log(check)
+      if (check[0]) {
+        //console.log(check[0]);
+        res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
+      } else {
+        //res.send({result: true, check: 'yes'});
+      }
+    },query,param);
 
-
+  }
 
 });
 

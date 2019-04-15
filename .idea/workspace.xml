@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="140" column="8" lean-forward="true" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
+            <state relative-caret-position="240">
+              <caret line="16" column="73" lean-forward="true" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -236,12 +236,12 @@
       <workItem from="1553774665395" duration="3647000" />
       <workItem from="1553787764004" duration="10738000" />
       <workItem from="1554052935612" duration="14588000" />
-      <workItem from="1555263926891" duration="22106000" />
+      <workItem from="1555263926891" duration="22353000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92854000" />
+    <option name="totallyTimeSpent" value="93101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-2" width="1920" height="1082" extended-state="6" />
@@ -423,13 +423,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DB/db_connect.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index_03.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -437,10 +430,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DB/db_connect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="140" column="8" lean-forward="true" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
+        <state relative-caret-position="240">
+          <caret line="16" column="73" lean-forward="true" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
         </state>
       </provider>
     </entry>

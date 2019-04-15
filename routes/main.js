@@ -132,8 +132,8 @@ router.post('/check_time', function(req, res, next){
   if(req.session.logined)
   {
     var stu_num = req.session.stu_num;
-    var time = moment().add(33,"hours").format("YYYY-MM-DD HH:mm:ss");
-    var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(now()) AND stu_num = ${stu_num}`
+    var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
+    var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(${time}) AND stu_num = ${stu_num}`
     var param = '';
     sql.query(function(err, check){
       if (err) console.log(err);

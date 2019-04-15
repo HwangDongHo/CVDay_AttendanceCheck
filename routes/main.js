@@ -80,7 +80,7 @@ router.post('/login', function(req, res, next) {
 
 
 router.get('/main', function(req, res, next) {
-  var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) GROUP BY ym,stu_num ORDER BY plus DESC;`;
+  var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) AND how_late != 0 GROUP BY ym,stu_num ORDER BY plus DESC;`;
   var param3 = '';
   sql.query(function (err, check) {
     if (err) console.log(err);

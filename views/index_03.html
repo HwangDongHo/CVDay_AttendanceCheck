@@ -67,7 +67,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script language="javascript">
 
-    var timeoutid = setTimeout(showClock, 1000);
+    var interval = setInterval(showClock, 1000);
 
 	function showClock() {
 		var divClock = document.getElementById("divClock");
@@ -93,7 +93,7 @@
 				}
 				else{
                     divClock.innerText = "로그인이 만료되었습니다.";
-                    clearTiemout(timeoutid);
+                    clearInterval(interval);
                 }
 			}
 		})

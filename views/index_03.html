@@ -90,10 +90,11 @@
 				}
 				else{
                     divClock.innerText = "로그인이 만료되었습니다.";
+                    clearTiemout(timeoutid);
                 }
 			}
 		})
-        setTimeout(showClock, 1000);
+        var timeoutid = setTimeout(showClock, 1000);
 	}
 </script>
 <script type="text/javascript">

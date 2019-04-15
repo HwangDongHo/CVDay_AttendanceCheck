@@ -17,6 +17,7 @@ io.sockets.on('connection', function (socket) {
         var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
         var late = moment().add(9,"hours").hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
         var minute = moment(time).diff(late,"minute");
+        if(minute<0) minute =0;
         console.log(late+"  "+minute+"분  "+minute*200+"원");
         console.log(time+"  "+minute+"분  "+minute*200+"원");
 

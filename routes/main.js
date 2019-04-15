@@ -144,7 +144,9 @@ router.post('/check_time', function(req, res, next){
         //res.send({result: true, check: 'yes'});
       }
     },query,param);
-
+  }
+  else{
+    res.send({result: false});
   }
 
 });

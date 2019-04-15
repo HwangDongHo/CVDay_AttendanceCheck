@@ -11,8 +11,8 @@
 </body>
 <script>
 
-  var socket = io.connect('http://15.164.54.201:8181');
-  //var socket = io.connect('http://localhost:8181');
+  //var socket = io.connect('http://15.164.54.201:8181');
+  var socket = io.connect('http://localhost:8181');
   function myOnClick() {
     socket.emit("check", "14184455");
   }

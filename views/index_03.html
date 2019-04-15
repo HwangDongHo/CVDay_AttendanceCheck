@@ -49,8 +49,8 @@
 	<div class="information">
 		<div class="information_in"> 
 			<ul>
-				<li><span>이름:&nbsp;<em><%= name %></em></span></li>
-				<li><span>현재 시간:&nbsp;<em id="divClock" class="clock"><%= name %></em></span></li>
+				<li><span>이름:&nbsp;<em id="divName"><%= name %></em></span></li>
+				<li><span>현재 시간:&nbsp;<em id="divClock" class="clock">페이지 로딩중입니다.</em></span></li>
 				<li><span>출석 시간:&nbsp;<em id="divAttend">미출석</em></span></li>
 				<li><span>지각 여부:&nbsp;<em id="divLate">미출석</em></span></li>
 				<li><span>지각 금액:&nbsp;<em id="divLate_money">해당 없음</em></span></li>
@@ -65,35 +65,39 @@
 </script>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="../socket.io-client/dist/socket.io.js"></script>
 <script language="javascript">
 	function showClock() {
 		var divClock = document.getElementById("divClock");
         var divAttend = document.getElementById("divAttend");
         var divLate = document.getElementById("divLate");
         var divLate_money = document.getElementById("divLate_money");
-		$.ajax({
+        $.ajax({
 			url : '/check_time',
 			dataType: 'json',
 			type : 'POST',
 			success : function(result){
 				if(result.result == true){
 					divClock.innerText = result.time;
+
                     divAttend.innerText = result.attend_time;
                     if(result.late_time == 0) {
-                        divLate.innerText = "해당없음";
+                        divLate.innerText = "해당없";
                     }
                     else{
                         divLate.innerText = result.late_time + "분 지각";
                         divLate_money.innerText = result.late_time*200;
                     }
 				}
+				else{
+                    divClock.innerText = "로그인이 만료되었습니다.";
+                }
 			}
 		})
-		setTimeout(showClock, 1000);
+        setTimeout(showClock, 1000);
 	}
 </script>
 <script type="text/javascript">
+
 	$(".btn").click(function() {
   $("#menu,.page_cover,html").addClass("open");
   window.location.hash = "#open";
@@ -102,27 +106,8 @@
 window.onhashchange = function() {
   if (location.hash != "#open") {
     $("#menu,.page_cover,html").removeClass("open");
-  }
-};
+  }};
 
-/*
-var socket = io.connect('http://15.164.54.201:8181');
-//var socket = io.connect('http://localhost:8181');
-
-	var $attendance = $('.attendance');
-	var $late = $('.late');
-	var $late_m = $('.late_m');
-	socket.on('recieve',function(data) {
-		$attendance.text(data.time);
-		if(data.late == 0)
-			$late.text("정상 출석");
-		else{
-			$late.text("지각");
-			$late_m.text(data.time*200+"원");
-		}
-	});
-
-*/
 </script>
 
 </body>

@@ -90,7 +90,9 @@
                         divLate.innerText = result.late_time + "분 지각";
                         divLate_money.innerText = result.late_time*200;
                     }
-				}
+				}else if(result.result == 3){
+                    divClock.innerText = result.time;
+                }
 				else{
                     divClock.innerText = "로그인이 만료되었습니다.";
                     clearInterval(interval);

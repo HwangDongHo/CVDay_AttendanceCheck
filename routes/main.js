@@ -141,7 +141,7 @@ router.post('/check_time', function(req, res, next){
         //console.log(check[0]);
         res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
       } else {
-        //res.send({result: true, check: 'yes'});
+        res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
       }
     },query,param);
   }

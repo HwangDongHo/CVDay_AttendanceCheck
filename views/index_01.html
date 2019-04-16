@@ -30,7 +30,7 @@
 
 		<div class="Join_studentID">
 			<h2 class="studentid_name">학번 <span class="ok_box"><Input type='BUTTON' value='중복확인' onclick ='' id="checkBtn" class="bt-search"></span></h2>
-			<input type="number" class="form-control" id="Join_studentID" onblur="onblur_studentID()" placeholder="학번을 입력해주세요."  maxlength="8" oninput="maxLengthCheck(this)" name="student_number">
+			<input type="number" class="form-control" id="Join_studentID" onblur="onblur_studentID()" placeholder="학번을 입력해주세요."  maxlength="9" oninput="maxLengthCheck(this)" name="student_number">
 			<p class="ell_studentid">이름 형식이 올바르지 않습니다.</p>
 			<p class="ell_studentid_chek">사용할 수 있는 아이디입니다.</p>
 
@@ -183,7 +183,7 @@
 
 		if($studentid.length < 6 || $studentid.length > 9){
 			$studentidtext.css('display','block');
-			$studentidtext.text('학번을 6자이상 8자 이하로 입력해주세요.');
+			$studentidtext.text('학번을 6자이상 9자 이하로 입력해주세요.');
 			studentID_tf = false;
 			return false;
 		}else{

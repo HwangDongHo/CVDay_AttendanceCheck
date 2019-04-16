@@ -145,7 +145,6 @@ router.post('/check_time', function(req, res, next){
     sql.query(function(err, check){
       if (err) console.log(err);
 
-
       var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) AND how_late != 0 GROUP BY ym,stu_num ORDER BY plus DESC;`;
       var param3 = '';
       var times = 0;
@@ -155,25 +154,31 @@ router.post('/check_time', function(req, res, next){
       sql.query(function (err, ranking) {
         if (err) console.log(err);
         if (ranking[0]) {
-
           for(var i =0;i<ranking.length;i++){
             if(req.session.stu_num == ranking[i].stu_num) {
               times = ranking[i].cnt;
-              rank = i+1;
+              rank = i + 1;
               total = ranking[i].plus * 200;
             }
-            console.log(times + " "+rank+" "+total);
+          }
+
+          console.log(times + " "+rank+" "+total);
+          if (check[0]) {
+            res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
+          } else {
+            res.send({result: 3, time: time});
+          }
+
+        }else{
+          if (check[0]) {
+            res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
+          } else {
+            res.send({result: 3, time: time});
           }
         }
       }, query3, param3);
 
-      console.log(times + " "+rank+" "+total);
 
-      if (check[0]) {
-        res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
-      } else {
-        res.send({result: 3, time: time});
-      }
     },query,param);
   }
   else{

@@ -136,6 +136,7 @@ router.get('/logout', function(req, res, next){
 });
 
 router.post('/check_time', function(req, res, next){
+  console.log("check_time");
   if(req.session.logined)
   {
     var stu_num = req.session.stu_num;
@@ -167,8 +168,6 @@ router.post('/check_time', function(req, res, next){
           }
         }
       }, query2, param2);
-
-
     },query,param);
   }
   else{

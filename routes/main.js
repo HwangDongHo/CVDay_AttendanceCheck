@@ -136,22 +136,18 @@ router.get('/logout', function(req, res, next){
 });
 
 router.post('/check_time', function(req, res, next){
-  console.log("check_time");
   if(req.session.logined)
   {
-    console.log("check_time2");
     var stu_num = req.session.stu_num;
     var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
     var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(DATE_ADD(NOW(), INTERVAL 9 HOUR)) AND stu_num = ${stu_num}`
     var param = '';
     sql.query(function(err, check){
-      console.log("check_time3");
       if (err) console.log(err);
       var query2 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) AND how_late != 0 GROUP BY ym,stu_num ORDER BY plus DESC;`;
       var param2 = '';
       sql.query(function (err, check2) {
         if (err) console.log(err);
-        console.log("check_time4");
         if (check2[0]) {
           var time = 0;
           var rank = 0;
@@ -163,7 +159,7 @@ router.post('/check_time', function(req, res, next){
               total = check2[i].plus * 200;
             }
           }
-
+          console.log(check);
           if (check[0]) {
             res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
           } else {

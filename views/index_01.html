@@ -158,7 +158,7 @@
 	function onblur_Password(){
 		var $password = $('#Join_Password');
 		var $passwordtext = $('.ell_pass');
-		var regExpPw = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+		var regExpPw = /(?=.*\d{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
 
 		if( !$password.val() ){
 			$passwordtext.css('display','block');

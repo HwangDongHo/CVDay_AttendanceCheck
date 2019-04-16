@@ -158,7 +158,7 @@
 	function onblur_Password(){
 		var $password = $('#Join_Password');
 		var $passwordtext = $('.ell_pass');
-		var regExpPw = /(?=.*\d{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+		var regExpPw = /.{8,50}$/;
 
 		if( !$password.val() ){
 			$passwordtext.css('display','block');
@@ -167,7 +167,7 @@
 			return false;
 		} else if(!regExpPw.test($password.val())) {
 			$passwordtext.css('display','block');
-			$passwordtext.text('비밀번호에 특수문자, 숫자, 영문 1회이상 사용하여 8자리 이상 입력해주세요.');
+			$passwordtext.text('비밀번호를 8자리 이상 입력해주세요.');
 			password_tf = false;
 			return false;
 		} else{

@@ -144,13 +144,31 @@ router.post('/check_time', function(req, res, next){
     var param = '';
     sql.query(function(err, check){
       if (err) console.log(err);
-      //console.log(check)
-      if (check[0]) {
-        console.log(check[0]);
-        res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
-      } else {
-        res.send({result: 3, time: time});
-      }
+      var query2 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) AND how_late != 0 GROUP BY ym,stu_num ORDER BY plus DESC;`;
+      var param2 = '';
+      sql.query(function (err, check2) {
+        if (err) console.log(err);
+        if (check2[0]) {
+          var time = 0;
+          var rank = 0;
+          var total = 0;
+          for(var i =0;i<check2.length;i++) {
+            if (req.session.stu_num == check2[i].stu_num) {
+              time = check2[i].cnt;
+              rank = i + 1;
+              total = check2[i].plus * 200;
+            }
+          }
+
+          if (check[0]) {
+            res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
+          } else {
+            res.send({result: 3, time: time});
+          }
+        }
+      }, query2, param2);
+
+
     },query,param);
   }
   else{

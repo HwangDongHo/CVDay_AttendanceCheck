@@ -93,7 +93,7 @@ router.post('/account/success', function(req,res,next){
   var kakao = req.body.kakao;
   var phone = req.body.phone;
   var password = req.body.password
-  var query = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,created) VALUES(?, ?, ?,?,?,?,NOW())`;
+  var query = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,created) VALUES(?, ?, ?,?,?,?,DATE_ADD(NOW(), INTERVAL 9 HOUR))`;
   var param = [name, stu_num, email,kakao,phone,password];
 
   sql.query(function(err, check){

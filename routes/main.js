@@ -152,15 +152,15 @@ router.post('/check_time', function(req, res, next){
       var rank = 0;
       var total = 0;
 
-      sql.query(function (err, check) {
+      sql.query(function (err, ranking) {
         if (err) console.log(err);
-        if (check[0]) {
+        if (ranking[0]) {
 
-          for(var i =0;i<check.length;i++){
-            if(req.session.stu_num == check[i].stu_num) {
-              times = check[i].cnt;
+          for(var i =0;i<ranking.length;i++){
+            if(req.session.stu_num == ranking[i].stu_num) {
+              times = ranking[i].cnt;
               rank = i+1;
-              total = check[i].plus * 200;
+              total = ranking[i].plus * 200;
             }
             console.log(times + " "+rank+" "+total);
           }
@@ -168,7 +168,7 @@ router.post('/check_time', function(req, res, next){
       }, query3, param3);
 
       console.log(times + " "+rank+" "+total);
-      
+
       if (check[0]) {
         res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
       } else {

@@ -147,12 +147,15 @@ router.post('/check_time', function(req, res, next){
 
       var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) AND how_late != 0 GROUP BY ym,stu_num ORDER BY plus DESC;`;
       var param3 = '';
-      var times = 0;
-      var rank = 0;
-      var total = 0;
+
 
       sql.query(function (err, ranking) {
         if (err) console.log(err);
+
+        var times = 0;
+        var rank = 0;
+        var total = 0;
+
         if (ranking[0]) {
           for(var i =0;i<ranking.length;i++){
             if(req.session.stu_num == ranking[i].stu_num) {

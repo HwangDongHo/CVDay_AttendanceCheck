@@ -6,18 +6,20 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+<input type="text" id="test" size="4"/>
 <input type="button" value="check submit" onclick="myOnClick()">
 <input type="button" value="check_db submit" onclick="myOnClick2()">
 </body>
 <script>
+  var $phone = $('#test');
 
-  //var socket = io.connect('http://15.164.54.201:8181');
-  var socket = io.connect('http://localhost:8181');
+  var socket = io.connect('http://15.164.54.201:8181');
+  //var socket = io.connect('http://localhost:8181');
   function myOnClick() {
-    socket.emit("check", "14184455");
+    socket.emit("check", $phone);
   }
   function myOnClick2() {
-    socket.emit("check2", "14184455");
+    socket.emit("check2", $phone);
   }
 
 </script>

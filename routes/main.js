@@ -19,7 +19,6 @@ io.sockets.on('connection', function (socket) {
         var minute = moment(time).diff(late,"minute");
         if(minute<0) minute =0;
         console.log(late+"  "+minute+"분  "+minute*200+"원");
-        console.log(time+"  "+minute+"분  "+minute*200+"원");
 
         var query2 = `INSERT INTO late_log (stu_num,check_time,how_late) VALUES(?,?,?)`;
         var param2 = [data,time,minute];

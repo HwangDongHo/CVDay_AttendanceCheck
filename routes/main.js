@@ -167,7 +167,7 @@ router.post('/check_time', function(req, res, next){
           if (check[0]) {
             res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late,times:times,rank:rank,total:total});
           } else {
-            res.send({result: 3, time: time});
+            res.send({result: 3, time: time,times:times,rank:rank,total:total});
           }
 
         }else{
@@ -175,7 +175,7 @@ router.post('/check_time', function(req, res, next){
             console.log(times+" "+rank+" "+total);
             res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late,times:times,rank:rank,total:total});
           } else {
-            res.send({result: 3, time: time});
+            res.send({result: 3, time: time,times:times,rank:rank,total:total});
           }
         }
       }, query3, param3);

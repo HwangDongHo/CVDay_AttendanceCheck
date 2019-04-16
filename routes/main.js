@@ -172,6 +172,7 @@ router.post('/check_time', function(req, res, next){
 
         }else{
           if (check[0]) {
+            console.log(times+" "+rank+" "+total);
             res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late,times:times,rank:rank,total:total});
           } else {
             res.send({result: 3, time: time});

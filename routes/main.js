@@ -14,43 +14,39 @@ io.sockets.on('connection', function (socket) {
     sql.query(function(err, check){
       if (err) console.log(err);
       if (check[0]) {
-        var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
-        var late = moment().add(9,"hours").hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
-        var minute = moment(time).diff(late,"minute");
-        if(minute<0) minute =0;
-        console.log(late+"  "+minute+"분  "+minute*200+"원");
 
-        var query2 = `INSERT INTO late_log (stu_num,check_time,how_late) VALUES(?,?,?)`;
-        var param2 = [data,time,minute];
-
+        var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(DATE_ADD(NOW(), INTERVAL 9 HOUR)) AND stu_num = ${data}`
+        var param = '';
         sql.query(function(err, check){
           if (err) console.log(err);
-        },query2,param2);
+          if (check[0]) {
+            console.log("already checked!");
+            socket.emit("recieve","already checked");
+          } else {
+            var time = moment().add(9,"hours").format("YYYY-MM-DD HH:mm:ss");
+            var late = moment().add(9,"hours").hour(10).minute(0).second(0).format("YYYY-MM-DD HH:mm:ss");
+            var minute = moment(time).diff(late,"minute");
+            if(minute<0) minute =0;
+            console.log(time+"  "+late+"  "+minute+"분  "+minute*200+"원");
 
-        socket.emit("recieve","checked");
-        socket.emit("page",{time:time,late:minute});
-      } else {
+            var query2 = `INSERT INTO late_log (stu_num,check_time,how_late) VALUES(?,?,?)`;
+            var param2 = [data,time,minute];
+
+            sql.query(function(err, check){
+              if (err) console.log(err);
+            },query2,param2);
+
+            socket.emit("recieve","checked");
+            socket.emit("page",{time:time,late:minute});
+          }
+        },query,param);
+
+
+      }else{
         console.log("not registered!");
         socket.emit("recieve","not registered");
       }
     },query,param);
-
-  /*
-  socket.on('check2', function (data) {
-    var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) GROUP BY ym,stu_num ORDER BY cnt DESC;`;
-    var param3 = '';
-    sql.query(function (err, check) {
-      if (err) console.log(err);
-      if (check[0]) {
-        for(var i =0;i<check.length;i++){
-          console.log(check[i].plus);
-        }
-
-      } else {
-        console.log("no")
-      }
-    }, query3, param3);
-  });*/
   });
 
 });
@@ -120,7 +116,18 @@ router.get('/main', function(req, res, next) {
 });
 
 router.get('/test', function(req, res, next) {
-  res.render('index_test');
+  var query = `select * from late_log;`;
+  var param = ''
+
+  sql.query(function (err, check) {
+    if (err) console.log(err);
+    if (check[0]) {
+      res.render('index_test.html',{data:check});
+    }else{
+      res.render('index_test.html',{data:check});
+    }
+  }, query, param);
+
 });
 
 router.get('/logout', function(req, res, next){

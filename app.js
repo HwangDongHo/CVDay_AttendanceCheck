@@ -16,7 +16,10 @@ var session = require('express-session');
 app.use(session({
   secret: 'keyboard cat',
   resave:false,
-  saveUninitialized :true
+  saveUninitialized :true,
+  cookie: {
+    maxAge: 24000 * 60 * 60 // 쿠키 유효기간 24시간
+  }
 }));
 
 

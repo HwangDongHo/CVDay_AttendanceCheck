@@ -161,6 +161,7 @@ router.post('/check_time', function(req, res, next){
               rank = i+1;
               total = check[i].plus * 200;
             }
+            console.log(time + " "+rank+" "+total);
           }
         }
       }, query3, param3);

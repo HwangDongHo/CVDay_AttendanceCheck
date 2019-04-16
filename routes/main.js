@@ -15,7 +15,7 @@ io.sockets.on('connection', function (socket) {
       if (err) console.log(err);
       if (check[0]) {
 
-        var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(DATE_ADD(NOW(), INTERVAL 9 HOUR)) AND stu_num = ${data}`
+        var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(DATE_ADD(NOW(), INTERVAL 9 HOUR)) AND stu_num = ${data}`;
         var param = '';
         sql.query(function(err, check){
           if (err) console.log(err);
@@ -144,13 +144,33 @@ router.post('/check_time', function(req, res, next){
     var param = '';
     sql.query(function(err, check){
       if (err) console.log(err);
+
+
+      var query3 = `SELECT stu_num,CONCAT(YEAR(check_time), '-', MONTH(check_time)) ym, COUNT(*) AS cnt ,sum(how_late) AS plus FROM late_log where month(check_time) = month(now()) AND how_late != 0 GROUP BY ym,stu_num ORDER BY plus DESC;`;
+      var param3 = '';
+
+      sql.query(function (err, check) {
+        if (err) console.log(err);
+        if (check[0]) {
+          var time = 0;
+          var rank = 0;
+          var total = 0;
+          for(var i =0;i<check.length;i++){
+            if(req.session.stu_num == check[i].stu_num) {
+              time = check[i].cnt;
+              rank = i+1;
+              total = check[i].plus * 200;
+            }
+          }
+        }
+      }, query3, param3);
+
+
       if (check[0]) {
         res.send({result: true, time: time,attend_time:check[0].date,late_time:check[0].how_late});
       } else {
         res.send({result: 3, time: time});
       }
-      
-
     },query,param);
   }
   else{

@@ -80,6 +80,7 @@
 				dataType: 'json',
 				type: 'POST',
 				success: function (result) {
+					console.log(result);
 					if (result.check == 'no') {
 						var $text = $('.login_err');
 						$text.css('display', 'block');

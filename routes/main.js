@@ -55,7 +55,7 @@ router.post('/login', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
   var query = `select * from account WHERE email = '${email}' AND password = '${password}'`;
-  var param = ''
+  var param = '';
 
   sql.query(function (err, check) {
     if (err) console.log(err);

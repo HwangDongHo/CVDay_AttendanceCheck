@@ -6,6 +6,17 @@ var moment = require('moment');
 var QRCode = require('qrcode');
 var crypto = require('crypto');
 var slack = require('slack-node');
+const tocken = require('../../data/data').slack.token;
+
+const send = async(message) => {
+  slack.api('chat.postMessage', {
+    username: 'dev-test',  // 슬랙에 표시될 봇이름
+    text:message,
+    channel:'@DongHo,Hwang'  // 전송될 채널 및 유저
+  }, function(err, response){
+    console.log(response);
+  });
+}
 
 
 io.sockets.on('connection', function (socket) {
@@ -139,7 +150,8 @@ router.get('/main', function(req, res, next) {
 
 router.get('/test', function(req, res, next) {
   var query = `select * from late_log;`;
-  var param = ''
+  var param = '';
+  send('메세지 내용');
   sql.query(function (err, check) {
     if (err) console.log(err);
     if (check[0]) {

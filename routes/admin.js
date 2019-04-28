@@ -7,7 +7,7 @@ router.get('/admin', function(req, res, next) {
     res.render('index_admin.html');
 });
 
-router.get('/si', function(req, res, next) {
+router.get('/admin/main', function(req, res, next) {
     res.render('index_admin2.html');
 });
 

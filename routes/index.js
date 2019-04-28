@@ -1,4 +1,5 @@
 var express = require('express');
+var crypto = require('crypto');
 var router = express.Router();
 
 var sql = require('../DB/db_SQL')();
@@ -92,7 +93,11 @@ router.post('/account/success', function(req,res,next){
   var email = req.body.email;
   var kakao = req.body.kakao;
   var phone = req.body.phone;
-  var password = req.body.password
+  var password = req.body.password;
+
+  var salt = Math.round((new Date().valueOf() * Math.random())) + "";
+  var hashPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
+
   var query = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,created) VALUES(?, ?, ?,?,?,?,DATE_ADD(NOW(), INTERVAL 9 HOUR))`;
   var param = [name, stu_num, email,kakao,phone,password];
 

@@ -117,7 +117,8 @@ router.get('/main', function(req, res, next) {
 router.get('/test', function(req, res, next) {
   var query = `select * from late_log;`;
   var param = ''
-
+  var salt = Math.round((new Date().valueOf() * Math.random())) + "";
+  console.log(salt);
   sql.query(function (err, check) {
     if (err) console.log(err);
     if (check[0]) {

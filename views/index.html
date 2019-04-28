@@ -70,6 +70,10 @@
 		}
 	}
 	$(document).on('click','#checkBtn',function() {
+
+		var email = $('#Login_Email').val();
+		var password = $('#Login_Password').val();
+
 		if (!kaka_tf) {
 			return false;
 		} else if (!kaka_tfs) {
@@ -79,6 +83,7 @@
 				url: '/login',
 				dataType: 'json',
 				type: 'POST',
+				data : {'email':email,'password':password},
 				success: function (result) {
 					console.log(result);
 					if (result.check == 'no') {

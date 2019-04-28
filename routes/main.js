@@ -13,7 +13,7 @@ const send = async(message) => {
     username: 'dev-test',  // 슬랙에 표시될 봇이름
     text:message,
     as_user:true,
-    channel:'DongHo,Hwang'  // 전송될 채널 및 유저
+    channel:'#7_잡담'  // 전송될 채널 및 유저
   }, function(err, response){
     console.log(response);
   });

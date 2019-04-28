@@ -5,6 +5,7 @@ var io = require('socket.io')(8181);
 var moment = require('moment');
 var QRCode = require('qrcode');
 var crypto = require('crypto');
+var slack = require('slack-node');
 
 
 io.sockets.on('connection', function (socket) {

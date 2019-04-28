@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var config = require('./db_info').aws;
+var config = require('../data/data').aws;
 
 module.exports = function () {
     var pool = mysql.createPool({

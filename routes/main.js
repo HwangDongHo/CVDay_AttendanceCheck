@@ -13,7 +13,7 @@ io.sockets.on('connection', function (socket) {
     sql.query(function(err, check){
       if (err) console.log(err);
       if (check[0]) {
-
+        data = check[0].stu_num;
         var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(DATE_ADD(NOW(), INTERVAL 9 HOUR)) AND stu_num = ${data}`;
         var param = '';
         sql.query(function(err, check){

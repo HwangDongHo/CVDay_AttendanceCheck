@@ -73,10 +73,13 @@
 		console.log("test");
 		function check() {
 			if (!kaka_tf) {
+				console.log("test2");
 				return false;
 			} else if (!kaka_tfs) {
+				console.log("test3");
 				return false;
 			} else {
+				console.log("test4");
 				$.ajax({
 					url: '/login',
 					dataType: 'json',

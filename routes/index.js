@@ -98,13 +98,11 @@ router.post('/account/success', function(req,res,next){
   var salt = Math.round((new Date().valueOf() * Math.random())) + "";
   var hashPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
 
-  var query = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,created) VALUES(?, ?, ?,?,?,?,DATE_ADD(NOW(), INTERVAL 9 HOUR))`;
-  var param = [name, stu_num, email,kakao,phone,password];
+  var query = `INSERT INTO account (name, stu_num, email,kakaoid,phone_num,password,salt,created) VALUES(?, ?, ?,?,?,?,?,DATE_ADD(NOW(), INTERVAL 9 HOUR))`;
+  var param = [name, stu_num, email,kakao,phone,hashPassword,salt];
 
   sql.query(function(err, check){
     if (err) console.log(err);
-    //console.log(check)
-    //sql.pool.end(function(err){if (err) console.log(err);});
   },query,param);
 
   res.render('index_02.html');

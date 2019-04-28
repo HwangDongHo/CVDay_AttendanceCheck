@@ -4,6 +4,8 @@ var sql = require('../DB/db_SQL')();
 var io = require('socket.io')(8181);
 var moment = require('moment');
 var QRCode = require('qrcode');
+var crypto = require('crypto');
+
 
 io.sockets.on('connection', function (socket) {
   socket.on('check', function (data) {
@@ -53,22 +55,42 @@ io.sockets.on('connection', function (socket) {
 
 router.post('/login', function(req, res, next) {
   var email = req.body.email;
-  var password = req.body.password;
-  var query = `select * from account WHERE email = '${email}' AND password = '${password}'`;
+
+
+  var query = `select * from account WHERE email = '${email}'`;
   var param = '';
 
   sql.query(function (err, check) {
     if (err) console.log(err);
     if (check[0]) {
-      req.session.logined = true;
-      req.session.user_id = email;
-      req.session.user_name = check[0].name;
-      req.session.stu_num = check[0].stu_num;
-      res.send({check:'yes'});
+      var salt = check[0].salt;
+      var password = req.body.password;
+      var hashPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
+
+      query = `select * from account WHERE email = '${email}' AND password = '${hashPassword}'`;
+      param = '';
+
+      sql.query(function (err, data) {
+        if (err) console.log(err);
+        if (data[0]) {
+          req.session.logined = true;
+          req.session.user_id = email;
+          req.session.user_name = data[0].name;
+          req.session.stu_num = data[0].stu_num;
+          res.send({check:'yes'});
+        } else {
+          res.send({check:'no'});
+        }
+      }, query, param);
+
     } else {
       res.send({check:'no'});
     }
   }, query, param);
+
+
+
+
 
 });
 
@@ -117,8 +139,6 @@ router.get('/main', function(req, res, next) {
 router.get('/test', function(req, res, next) {
   var query = `select * from late_log;`;
   var param = ''
-  var salt = Math.round((new Date().valueOf() * Math.random())) + "";
-  console.log(salt);
   sql.query(function (err, check) {
     if (err) console.log(err);
     if (check[0]) {

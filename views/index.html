@@ -51,12 +51,10 @@
 		var $kaka = $('#Login_Email');
 
 		if( !$kaka.val() ){
-			console.log("test10");
 			kaka_tf = false;
 			return false;
 		}
 		else{
-			console.log("test11");
 			kaka_tf = true;
 		}
 	}
@@ -72,29 +70,23 @@
 		}
 	}
 	$(document).on('click','#checkBtn',function() {
-		console.log("test");
-		function check() {
-			if (!kaka_tf) {
-				console.log("test2");
-				return false;
-			} else if (!kaka_tfs) {
-				console.log("test3");
-				return false;
-			} else {
-				console.log("test4");
-				$.ajax({
-					url: '/login',
-					dataType: 'json',
-					type: 'POST',
-					success: function (result) {
-						if (result.check == 'no') {
-							var $text = $('.login_err');
-							$text.css('display', 'block');
-							$text.text('아이디 또는 비밀번호를 다시 확인하세요.');
-						}
+		if (!kaka_tf) {
+			return false;
+		} else if (!kaka_tfs) {
+			return false;
+		} else {
+			$.ajax({
+				url: '/login',
+				dataType: 'json',
+				type: 'POST',
+				success: function (result) {
+					if (result.check == 'no') {
+						var $text = $('.login_err');
+						$text.css('display', 'block');
+						$text.text('아이디 또는 비밀번호를 다시 확인하세요.');
 					}
-				})
-			}
+				}
+			})
 		}
 	})
 

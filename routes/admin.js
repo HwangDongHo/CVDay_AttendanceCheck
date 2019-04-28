@@ -7,6 +7,9 @@ router.get('/admin', function(req, res, next) {
     res.render('index_admin.html');
 });
 
+router.post('/admin/main', function(req, res, next) {
+    res.render('index_admin2.html');
+});
 
 
 module.exports = router;

@@ -13,7 +13,7 @@ const send = async(message) => {
     username: 'dev-test',  // 슬랙에 표시될 봇이름
     text:message,
     as_user:true,
-    channel:'#7_잡담'  // 전송될 채널 및 유저
+    channel:'#account'  // 전송될 채널 및 유저
   }, function(err, response){
     console.log(response);
   });
@@ -28,6 +28,7 @@ io.sockets.on('connection', function (socket) {
       if (err) console.log(err);
       if (check[0]) {
         data = check[0].stu_num;
+        var name = check[0].name;
         var query = `SELECT stu_num,date_format(check_time, '%Y-%m-%d %T') As date,how_late FROM late_log where DAYOFMONTH(check_time) = DAYOFMONTH(DATE_ADD(NOW(), INTERVAL 9 HOUR)) AND stu_num = ${data}`;
         var param = '';
         sql.query(function(err, check){
@@ -47,6 +48,7 @@ io.sockets.on('connection', function (socket) {
 
             sql.query(function(err, check){
               if (err) console.log(err);
+              send(name+'님이'+minute+'분 지각하셨습니다.'+minute*200+'원 납부해주세요');
             },query2,param2);
 
             socket.emit("recieve","checked");
@@ -151,7 +153,6 @@ router.get('/main', function(req, res, next) {
 router.get('/test', function(req, res, next) {
   var query = `select * from late_log;`;
   var param = '';
-  send('메세지 내용');
   sql.query(function (err, check) {
     if (err) console.log(err);
     if (check[0]) {

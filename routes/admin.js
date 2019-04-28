@@ -8,7 +8,18 @@ router.get('/admin', function(req, res, next) {
 });
 
 router.get('/admin/main', function(req, res, next) {
-    res.render('index_admin2.html');
+
+    var query = `select * from account`;
+    var param = '';
+
+    sql.query(function (err, check) {
+        if (err) console.log(err);
+        if (check[0]) {
+            res.render('index_admin2.html',{account:check});
+        }
+    }, query, param);
+
+
 });
 
 

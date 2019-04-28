@@ -5,9 +5,9 @@ var io = require('socket.io')(8181);
 var moment = require('moment');
 var QRCode = require('qrcode');
 var crypto = require('crypto');
-var slack = require('slack-node');
+var Slack = require('slack-node');
 const tocken = require('../../data/data').slack.token;
-
+const slack = new Slack(tocken);
 const send = async(message) => {
   slack.api('chat.postMessage', {
     username: 'dev-test',  // 슬랙에 표시될 봇이름

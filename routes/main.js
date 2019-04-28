@@ -66,7 +66,7 @@ router.post('/login', function(req, res, next) {
       req.session.stu_num = check[0].stu_num;
       res.redirect("/main");
     } else {
-      res.redirect("/");
+      res.send({check:'no'});
     }
   }, query, param);
 

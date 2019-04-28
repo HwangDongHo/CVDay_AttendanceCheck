@@ -116,7 +116,7 @@ input[type=checkbox]:checked + label { background-image: url('../img/select.png'
 /*계정정보*/
 .Join_name, .Join_kaka, .Join_phone{ margin-top:15px;}
 .Join_email, .Join_studentID{position:relative; margin-top:15px;}
-.Join_email .ell_text,.Join_password .ell_pass,.Join_password .ell_passcheck, .Join_name .ell_name,.Join_studentID .ell_studentid, .Join_kaka .ell_kaka ,.Join_phone .ell_phone{color:#ff0000; font-size:12px; margin-top:5px; display: none;}
+.login_err, .Join_email .ell_text,.Join_password .ell_pass,.Join_password .ell_passcheck, .Join_name .ell_name,.Join_studentID .ell_studentid, .Join_kaka .ell_kaka ,.Join_phone .ell_phone{color:#ff0000; font-size:12px; margin-top:5px; display: none;}
 .Join_studentID .ell_studentid_chek, .Join_email .ell_text_chek{color:#14bdb6; font-size:12px; margin-top:5px;display: none;}
 .Join_email .email_name, .Join_studentID .studentid_name, .Join_name .name_name {padding-top:10px; font-size:16px; font-weight:bold;}
 .Join_email .email_name .ok_box, .Join_studentID .ok_box{position:absolute; top:45px; right:0; width:63px;height:23px; font-size:11px;font-weight:normal;}

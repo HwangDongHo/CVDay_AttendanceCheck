@@ -42,13 +42,13 @@ io.sockets.on('connection', function (socket) {
             var minute = moment(time).diff(late,"minute");
             if(minute<0) minute =0;
             console.log(time+"  "+late+"  "+minute+"분  "+minute*200+"원");
-
+            send(name+'님이'+minute+'분 지각하셨습니다.'+minute*200+'원 납부해주세요');
             var query2 = `INSERT INTO late_log (stu_num,check_time,how_late) VALUES(?,?,?)`;
             var param2 = [data,time,minute];
 
             sql.query(function(err, check){
               if (err) console.log(err);
-              send(name+'님이'+minute+'분 지각하셨습니다.'+minute*200+'원 납부해주세요');
+
             },query2,param2);
 
             socket.emit("recieve","checked");

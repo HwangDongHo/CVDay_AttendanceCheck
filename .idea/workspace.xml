@@ -116,6 +116,7 @@
       <find>checkEBtn</find>
       <find>button</find>
       <find>ell_phone</find>
+      <find>checkBtn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">

@@ -27,7 +27,7 @@
 				<p class="login_err">아이디 또는 비밀번호를 다시 확인하세요.</p>
 			</div>
 			<div class="login_submit">
-				<input type="BUTTON" value="로그인" onblur="check()" id="checkBtn"/>
+				<input type="BUTTON" value="로그인" id="checkBtn"/>
 			</div>
 		<div class="login_forget">
 			<a href="#">비밀번호를 잊어버리셨나요?</a>
@@ -45,12 +45,7 @@
 	var kaka_tf = false;
 	var kaka_tfs = false;
 
-	function check(){
-		if (!kaka_tf) {return false;}
-		else if(!kaka_tfs) {return false;}
-		else{
-			return true;}
-	}
+
 
 	function onblur_email(){
 		var $kaka = $('#Login_Email');
@@ -75,18 +70,27 @@
 		}
 	}
 	$(document).on('click','#checkBtn',function() {
-		$.ajax({
-			url: '/login',
-			dataType: 'json',
-			type: 'POST',
-			success: function (result) {
-				if (result.check == 'no') {
-					var $text = $('.login_err');
-					$text.css('display', 'block');
-					$text.text('아이디 또는 비밀번호를 다시 확인하세요.');
-				}
+
+		function check(){
+			if (!kaka_tf) {return false;}
+			else if(!kaka_tfs) {return false;}
+			else{
+				$.ajax({
+					url: '/login',
+					dataType: 'json',
+					type: 'POST',
+					success: function (result) {
+						if (result.check == 'no') {
+							var $text = $('.login_err');
+							$text.css('display', 'block');
+							$text.text('아이디 또는 비밀번호를 다시 확인하세요.');
+						}
+					}
+				})
 			}
-		})
+		}
+
+
 	}
 
 </script>

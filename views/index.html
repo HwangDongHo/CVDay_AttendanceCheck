@@ -71,10 +71,12 @@
 	}
 	$(document).on('click','#checkBtn',function() {
 
-		function check(){
-			if (!kaka_tf) {return false;}
-			else if(!kaka_tfs) {return false;}
-			else{
+		function check() {
+			if (!kaka_tf) {
+				return false;
+			} else if (!kaka_tfs) {
+				return false;
+			} else {
 				$.ajax({
 					url: '/login',
 					dataType: 'json',
@@ -89,9 +91,7 @@
 				})
 			}
 		}
-
-
-	}
+	})
 
 </script>
 </html>

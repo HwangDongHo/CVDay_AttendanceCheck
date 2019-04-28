@@ -64,7 +64,7 @@ router.post('/login', function(req, res, next) {
       req.session.user_id = email;
       req.session.user_name = check[0].name;
       req.session.stu_num = check[0].stu_num;
-      res.redirect("/main");
+      res.send({check:'yes'});
     } else {
       res.send({check:'no'});
     }

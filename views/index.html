@@ -84,6 +84,8 @@
 						var $text = $('.login_err');
 						$text.css('display', 'block');
 						$text.text('아이디 또는 비밀번호를 다시 확인하세요.');
+					}else if(result.check == 'yes'){
+						window.location.href = '/main';
 					}
 				}
 			})

@@ -7,7 +7,7 @@ router.get('/admin', function(req, res, next) {
     res.render('index_admin.html');
 });
 
-router.post('/admin/main', function(req, res, next) {
+router.post('/si', function(req, res, next) {
     res.render('index_admin2.html');
 });
 

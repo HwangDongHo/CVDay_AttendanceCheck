@@ -19,7 +19,6 @@ const send = async(message) => {
   });
 }
 
-
 io.sockets.on('connection', function (socket) {
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);

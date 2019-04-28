@@ -49,9 +49,8 @@
 							<th style="width:10%; ">총 지각 벌금</th>
 							<th style="width:10%; ">지각 횟수</th>
 						</tr>
-						<tr class="tr_st2" onclick="send_view('225');">
-
-							<% for(var i=0; i<data.length; i++) {%>
+						<% for(var i=0; i<data.length; i++) {%>
+							<tr class="tr_st2" onclick="send_view('225');">
 								<td><%= data[i].id %></td>
 								<td><%= data[i].name %></td>
 								<td><%= data[i].stu_num %></td>
@@ -62,20 +61,8 @@
 								<td><%= i %></td>
 								<td><%= i %></td>
 								<td><%= i %></td>
-							<% } %>
-
-
-						<td>1</td>
-							<td>김상준</td>
-							<td>19620058</td>
-							<td>gogo5911@naver.com</td>
-							<td>427ke</td>
-							<td>010-9006-5901</td>
-							<td>2019-01-01</td>
-							<td>1</td>
-							<td>1</td>
-							<td>1</td>
-						</tr>
+							</tr>
+						<% } %>
 						<tr class="tr_st2" onclick="send_view('224');">
 					</tbody>
 				</table>

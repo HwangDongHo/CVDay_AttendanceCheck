@@ -8,7 +8,7 @@ var QRCode = require('qrcode');
 io.sockets.on('connection', function (socket) {
   socket.on('check', function (data) {
     console.log('출석체크 :' + data);
-    var query = `SELECT * FROM account WHERE stu_num = ${data}`;
+    var query = `SELECT * FROM account WHERE stu_num = convert(${data},varchar)`;
     var param = '';
     sql.query(function(err, check){
       if (err) console.log(err);

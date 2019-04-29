@@ -36,6 +36,8 @@ router.get('/admin/main', function(req, res, next) {
                     }
 
                     res.render('index_admin2.html',{account:check,rank:rank,cnt:cnt,total_late:total_late});
+                }else{
+                    res.render('index_admin2.html',{account:check});
                 }
             }, query1, param);
 

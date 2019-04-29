@@ -7,6 +7,17 @@ router.get('/admin', function(req, res, next) {
     res.render('index_admin.html');
 });
 
+router.post('/admin/login', function(req, res, next) {
+    var email = req.body.email;
+    var password = req.body.password;
+
+    if(email == 'admin' && password == 'admin'){
+        res.redirect('/admin/main');
+    }else{
+        res.redirect('/admin');
+    }
+});
+
 router.get('/admin/main', function(req, res, next) {
 
     var query = `select * from account`;

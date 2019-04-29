@@ -20,11 +20,10 @@ router.get('/admin/main', function(req, res, next) {
 
             sql.query(function (err, log) {
                 if (err) console.log(err);
+                var rank = new Array();
+                var cnt = new Array();
+                var total_late = new Array();
                 if (log[0]) {
-                    var rank = new Array();
-                    var cnt = new Array();
-                    var total_late = new Array();
-
                     for(var i =0;i<check.length;i++){
                         for(var j =0;j<log.length;j++){
                             if(check[i].stu_num == log[j].stu_num){
@@ -37,7 +36,7 @@ router.get('/admin/main', function(req, res, next) {
 
                     res.render('index_admin2.html',{account:check,rank:rank,cnt:cnt,total_late:total_late});
                 }else{
-                    res.render('index_admin2.html',{account:check});
+                    res.render('index_admin2.html',{account:check,rank:rank,cnt:cnt,total_late:total_late});
                 }
             }, query1, param);
 

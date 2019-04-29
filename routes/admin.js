@@ -24,12 +24,13 @@ router.get('/admin/main', function(req, res, next) {
                     var rank = new Array();
                     var cnt = new Array();
                     var total_late = new Array();
+
                     for(var i =0;i<check.length;i++){
                         for(var j =0;j<log.length;j++){
                             if(check[i].stu_num == log[j].stu_num){
                                 rank[i] = j+1;
                                 cnt[i] = log[j].cnt;
-                                total_late = log[j].total_late;
+                                total_late[i] = log[j].total_late*200;
                             }
                         }
                     }

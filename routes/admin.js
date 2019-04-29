@@ -12,8 +12,10 @@ router.post('/admin/login', function(req, res, next) {
     var password = req.body.password;
 
     if(email == 'admin' && password == 'admin'){
+        console.log('yes');
         res.redirect('/admin/main');
     }else{
+        console.log('no');
         res.redirect('/admin');
     }
 });

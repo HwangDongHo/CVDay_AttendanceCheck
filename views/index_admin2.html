@@ -26,7 +26,7 @@
 	<div class="r_top clearfix">
 		<div class="clickm">
 			<form>
-				<input class="logout" type="button" value="로그아웃">
+				<input class="logout" type="button" value="로그아웃" id="checkEBtn">
 			</form>
 		</div>
 		
@@ -68,8 +68,13 @@
 				</table>
 			</div>
 		</div>
-	<div>
+	</div>
 	
 </div>
 </body>
+<script type="text/javascript">
+	$(document).on('click','#checkBtn',function(){
+		window.location.href='/admin';
+	});
+</script>
 </html>

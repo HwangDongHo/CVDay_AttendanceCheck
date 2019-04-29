@@ -29,7 +29,7 @@ router.get('/admin/main', function(req, res, next) {
                             if(check[i].stu_num == log[j].stu_num){
                                 rank[i] = j+1;
                                 cnt[i] = log[j].cnt;
-                                total_late = log[j].total_late * 200;
+                                total_late = log[j].total_late;
                             }
                         }
                     }

@@ -46,7 +46,7 @@
 							<th style="width:10%; ">휴대폰 번호</th>
 							<th style="width:10%; ">생성 날짜</th>
 							<th style="width:10%; ">지각 랭킹</th>
-							<th style="width:10%; ">총 지각 벌금</th>
+							<th style="width:10%; ">총 지각 벌금(원)</th>
 							<th style="width:10%; ">지각 횟수</th>
 						</tr>
 						<% for(var i=0; i< account.length; i++) {%>
@@ -59,7 +59,7 @@
 								<td><%= account[i].phone_num %></td>
 								<td><%= account[i].created %></td>
 								<td><%= rank[i] %></td>
-								<td><%= total_late[i] %><span>원</span></td>
+								<td><%= total_late[i] %></td>
 								<td><%= cnt[i] %></td>
 							</tr>
 						<% } %>

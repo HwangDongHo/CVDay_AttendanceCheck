@@ -10,7 +10,8 @@ router.get('/admin', function(req, res, next) {
 router.post('/admin/login', function(req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
-
+    console.log(email);
+    console.log(password);
     if(email == 'admin' && password == 'admin'){
         console.log('yes');
         res.redirect('/admin/main');
